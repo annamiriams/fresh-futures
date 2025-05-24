@@ -1,0 +1,18 @@
+<!-- Load static files -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fresh Futures</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'main_app/styles.css' %}" />
+  </head>
+  <body>
+    {% include 'header.html' %} {% block content %}{% endblock %} {% include 'footer.html' %}
+  </body>
+</html>
