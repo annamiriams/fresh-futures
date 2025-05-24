@@ -61,7 +61,9 @@ ROOT_URLCONF = 'freshfutures.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +85,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'fresh_futures_db',
-        'USER': os.getenv('DB_USER', 'caseyjoiner'),  # Your Mac username
+        'USER': os.getenv('DB_USER', ''),  # PC or Mac username
         'PASSWORD': os.getenv('DB_PASSWORD', ''),
         'HOST': 'localhost',
         'PORT': '5432',

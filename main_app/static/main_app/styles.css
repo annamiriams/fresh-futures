@@ -1,0 +1,128 @@
+/* Global Styles */
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonts Families */
+.instrument-serif {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Font Sizes */
+.text-lg {
+  font-size: 2rem;
+  line-height: 1.75rem;
+}
+
+.logo-container {
+  padding: 2rem;
+}
+
+.logo-container a {
+  text-decoration: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+.logo p {
+  font-size: 2.5rem;
+  margin-left: 10px;
+  color: #000;
+}
+
+/* Margins (mt = margin top) */
+.mt-2 { 
+  margin-top: 0.5rem;
+}
+
+/* Font Weights */
+.bold {
+  font-weight: 700;
+}
+
+/* Display */
+.flex {
+  display: flex;
+}
+
+/* Buttons */
+.btn {
+  padding: 1rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 500;
+  transition: 0.4s ease;
+  width: 390px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.container {
+  margin: 3rem;
+}
+
+/* Hero Section */
+.hero-section h1 {
+  font-size: 4.5rem;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+/* Row Layout */
+.grid-row {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.grid-row img {
+  width: 85%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.grid-row p {
+  font-size: 2.25rem;
+}

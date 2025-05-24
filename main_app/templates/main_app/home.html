@@ -1,0 +1,59 @@
+<!-- Using layout.html as layout file -->
+{% extends "layout.html" %}
+<!-- Load static files -->
+{% load static %}
+<!-- Block content starts -->
+{% block content %}
+<div class="container">
+  <!-- Hero section -->
+  <div class="hero-section">
+    <!-- Header text -->
+    <h1 class="instrument-serif">Your Home for Community Gardening</h1>
+    <p>
+      Whether you want to grow your own food, connect with neighbors, or start a garden from scratch—this is your hub
+      for all things community gardening.
+    </p>
+  </div>
+
+  <!-- Content section with action buttons and images -->
+  <div class="content-section mt-2">
+    <p class="bold">Let's grow something good - together.</p>
+    <div class="grid-row mt-2">
+      <div class="left-col">
+        <img src="{% static 'main_app/images/Start-A-Garden-img.png' %}" />
+      </div>
+      <div class="right-col">
+        <p>Ready to get your hands dirty? Let's grow food, connection, and something that lasts.</p>
+        <button class="btn btn-primary">Start a Garden</button>
+      </div>
+    </div>
+    <div class="grid-row mt-2">
+      <div class="left-col">
+        <img src="{% static 'main_app/images/Join-A-Garden-img.png' %}" />
+      </div>
+      <div class="right-col">
+        <p>Help things bloom—lend a hand, grow with us, and be part of something meaningful.</p>
+        <button class="btn btn-primary">Join a Garden</button>
+      </div>
+    </div>
+    <div class="grid-row mt-2">
+      <div class="left-col">
+        <img src="{% static 'main_app/images/Donate-img.png' %}" />
+      </div>
+      <div class="right-col">
+        <p>Give a little, grow a lot. Your gift plants seeds of change where it’s needed most.</p>
+        <button class="btn btn-primary flex">Donate Now</button>
+      </div>
+    </div>
+    <div class="grid-row mt-2">
+      <div class="left-col">
+        <img src="{% static 'main_app/images/Beetbot-img.png' %}" />
+      </div>
+      <div class="right-col">
+        <p>From first seed to full garden—find tips, tools, FAQs, and BeetBot here.</p>
+        <button class="btn btn-primary">Learn with Beet Bot</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
