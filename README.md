@@ -41,7 +41,7 @@ Brief description.
 * Name, role: [LinkedIn](add link)
 
 ## <a name="workscited"></a>Works Cited:
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
+* **[AbstractUser](https://medium.com/@engr.tanveersultan53/when-and-how-to-use-django-abstractuser-and-abstractbaseuser-f02922745431)**: Used to simplify User Model by accessing Django's default fields (like username, first_name, last_name, etc).
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
