@@ -13,7 +13,7 @@ sudo apt-get --purge remove postgresql-16
 sudo apt install postgresql-17
 psql --version
 ### Should show: psql (PostgreSQL) 17.5 (Ubuntu 17.5-1.pgdg24.04+1)
-### Make sure you have veresion 17, not 16
+### Make sure you have version 17, not 16
 
 ## Option B: PostgreSQL Installer (Recommended per original guide, but bypassing due to the above)
 
@@ -55,7 +55,15 @@ set PGPASSWORD=your_postgres_password
 createdb -U postgres fresh_futures_db
 
 ## Enable PostGIS extension
+### This next line didn't work
 psql -U postgres -d fresh_futures_db -c "CREATE EXTENSION postgis; SELECT PostGIS_Version();"
+
+### install postgis-3
+sudo apt-get install postgresql-17-postgis-3 postgresql-17-postgis-3-scripts
+
+### enable extension (replaces the non-working line above)
+sudo -u postgres psql -d fresh_futures_db -c "CREATE EXTENSION postgis; SELECT PostGIS_Version();"
+
 Expected output:
 CREATE EXTENSION
             postgis_version            
@@ -63,11 +71,16 @@ CREATE EXTENSION
  3.5 USE_GEOS=1 USE_PROJ=1 USE_STATS=1
 (1 row)
 
+### To test postgis version without enabling the extension above, use this:
+psql
+SELECT * FROM pg_available_extensions WHERE name = 'postgis';
+
 # Step 3: Set Up Django Environment
 cmd
 ## Navigate to your project directory
 cd fresh-futures
 
+# no need to checkout branch because this is now merged with the main branch
 ## Switch to the location integration branch
 git checkout casey/location-integration
 git pull origin casey/location-integration
