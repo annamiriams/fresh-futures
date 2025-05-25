@@ -1,0 +1,42 @@
+{% extends "layout.html" %} {% load static %} {% block content %}
+
+<div class="container">
+  <h1 class="instrument-serif header-text">Create Your Account</h1>
+  <form method="POST" class="form">
+    {% csrf_token %} {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <div class="form-input">
+      <label>First Name</label>
+      <input type="text" name="first_name" required />
+    </div>
+    <div class="form-input">
+      <label>Last Name</label>
+      <input type="text" name="last_name" required />
+    </div>
+    <div class="form-input">
+      <label>Email Address</label>
+      <input type="email" name="email" required />
+    </div>
+    <div class="form-input">
+      <label>Password</label>
+      <input type="password" name="password" required />
+    </div>
+    {% comment %}
+    <div class="form-input">
+      <label>Where are you located?</label>
+      <input type="text" name="location" required />
+    </div>
+    {% endcomment %}
+    <div class="form-input">
+      <label>
+        <input type="checkbox" name="terms" required />
+        I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+      </label>
+    </div>
+    <button class="btn btn-primary" type="submit">Continue</button>
+    <p class="mt-2">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+  </form>
+</div>
+
+{% endblock %}

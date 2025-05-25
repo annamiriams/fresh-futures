@@ -1,0 +1,19 @@
+{% extends "layout.html" %} {% load static %} {% block content %}
+
+<div class="container">
+  <h1 class="instrument-serif header-text">Login</h1>
+  <form method="POST" class="form">
+    {% csrf_token %}
+    <div class="form-input">
+      <label>Email Address</label>
+      <input type="email" name="email" required />
+    </div>
+    <div class="form-input">
+      <label>Password</label>
+      <input type="password" name="password" required />
+    </div>
+    <p class="">Don't have an account? <a href="{% url 'register' %}">Create one</a></p>
+  </form>
+</div>
+
+{% endblock %}
