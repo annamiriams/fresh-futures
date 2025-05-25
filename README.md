@@ -42,7 +42,7 @@ Brief description.
 
 ## <a name="workscited"></a>Works Cited:
 * **[AbstractUser](https://medium.com/@engr.tanveersultan53/when-and-how-to-use-django-abstractuser-and-abstractbaseuser-f02922745431)**: Used to simplify User Model by accessing Django's default fields (like username, first_name, last_name, etc).
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
+* **[Django Field "choices"](https://vindevs.com/blog/how-to-use-django-field-choices-with-code-examples-p60/#:~:text=The%20choices%20option%20in%20a,forms%20and%20the%20Django%20admin.)**: Learning about "options" in Django was particularly when handling the user survey on the backend. The [docs](https://docs.djangoproject.com/en/5.2/ref/models/fields/) were also a great resource.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
