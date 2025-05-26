@@ -10,5 +10,34 @@
         <p class="inline">Fresh Futures</p>
       </div>
     </a>
+    <div id="menuToggle">
+      <input type="checkbox" id="menuCheckbox" />
+      <!-- These are the 3 lines that make up the hamburger menu icon -->
+      <span></span>
+      <span></span>
+      <span></span>
+      <ul id="menu">
+        <li>
+          <a href="{% url 'register' %}">
+            <label for="menuCheckbox" onclick="this.parentNode.click();">Create An Account</label>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <label for="menuCheckbox" onclick="this.parentNode.click();">Start a Garden</label>
+          </a>
+        </li>
+        <li>
+          <label for="menuCheckbox"><a>Join a Garden</a></label>
+        </li>
+        <li>
+          <label for="menuCheckbox"><a>Donate</a></label>
+        </li>
+        <li>
+          <label for="menuCheckbox"><a>Learn with BeetBot</a></label>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
+<nav role="navigation"></nav>
