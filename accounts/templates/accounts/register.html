@@ -3,7 +3,12 @@
 <div class="container">
   <h1 class="instrument-serif header-text">Create Your Account</h1>
   <form method="POST" class="form">
-    {% csrf_token %} {% if form.non_field_errors %}
+    {% csrf_token %}
+    
+    <!-- Displaying feedback notifications -->
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+    {% endfor %} {% endif %}{% if form.non_field_errors %}
     <div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>
     {% endif %}
     <div class="form-input">
@@ -15,12 +20,32 @@
       <input type="text" name="last_name" required />
     </div>
     <div class="form-input">
+      <label>Username</label>
+      <input type="text" name="username" required />
+      {% if form.username.errors %}
+      <span class="text-danger"> {{ form.username.errors }} </span>
+      {% endif %}
+    </div>
+    <div class="form-input">
       <label>Email Address</label>
       <input type="email" name="email" required />
+      {% if form.email.errors %}
+      <span class="text-danger"> {{ form.email.errors }} </span>
+      {% endif %}
     </div>
     <div class="form-input">
       <label>Password</label>
-      <input type="password" name="password" required />
+      <input type="password" name="password1" required />
+      {% if form.password1.errors %}
+      <span class="text-danger"> {{ form.password1.errors }} </span>
+      {% endif %}
+    </div>
+    <div class="form-input">
+      <label>Confirm Password</label>
+      <input type="password" name="password2" required />
+      {% if form.password2.errors %}
+      <span class="text-danger"> {{ form.password2.errors }} </span>
+      {% endif %}
     </div>
     {% comment %}
     <div class="form-input">
@@ -28,11 +53,9 @@
       <input type="text" name="location" required />
     </div>
     {% endcomment %}
-    <div class="form-input">
-      <label>
-        <input type="checkbox" name="terms" required />
-        I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
-      </label>
+    <div class="form-input flex items-start gap-4">
+      <input type="checkbox" name="terms" required />
+      <label> I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>. </label>
     </div>
     <button class="btn btn-primary" type="submit">Continue</button>
     <p class="mt-2">Already have an account? <a href="{% url 'login' %}">Login</a></p>
