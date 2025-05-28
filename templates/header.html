@@ -17,11 +17,18 @@
       <span></span>
       <span></span>
       <ul id="menu">
+        {% if not user.is_authenticated %}
         <li>
           <a href="{% url 'register' %}">
             <label for="menuCheckbox" onclick="this.parentNode.click();">Create An Account</label>
           </a>
         </li>
+        <li>
+          <a href="{% url 'login' %}">
+            <label for="menuCheckbox" onclick="this.parentNode.click();">Sign In</label>
+          </a>
+        </li>
+        {% endif %}
         <li>
           <a href="">
             <label for="menuCheckbox" onclick="this.parentNode.click();">Start a Garden</label>
@@ -36,6 +43,13 @@
         <li>
           <label for="menuCheckbox"><a>Learn with BeetBot</a></label>
         </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'logout' %}">
+            <label for="menuCheckbox" onclick="this.parentNode.click();">Logout</label>
+          </a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>
