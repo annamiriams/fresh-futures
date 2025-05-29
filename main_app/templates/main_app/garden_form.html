@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main_app/styles.css' %}" />
+{% endblock %}
+{% block content %}
+<div>
+    <h1 class="instrument-serif header-text">What's your "why?"</h1>
+
+<div>
+    <p class='bold'>Help us get to know more about you and your goals.</p>
+</div>
+
+<form action="" method="post" class="form-container">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+</form>
+
+<div>
+    <p>Thanks for planting the first seed!</p>
+</div>
+
+<button type="submit" class="btn btn-primary">Continue to Profile</button>
+</div>
+
+{% endblock %}
