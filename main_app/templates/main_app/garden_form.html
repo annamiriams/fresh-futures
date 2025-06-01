@@ -5,24 +5,38 @@
 {% endblock %}
 {% block content %}
 <div>
-    <h1 class="instrument-serif header-text">What's your "why?"</h1>
+    <h1 class="instrument-serif header-text">Where ya at?</h1>
 
-<div>
-    <p class='bold'>Help us get to know more about you and your goals.</p>
-</div>
+    <div>
+        <p class='bold'>Help us get to know more about you and your goals.</p>
+    </div>
 
-<form action="" method="post" class="form-container">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-</form>
+    <form action="" method="post" class="form-container">
+        {% csrf_token %}
 
-<div>
-    <p>Thanks for planting the first seed!</p>
-</div>
+        {% comment %} Adding validation error check {% endcomment %}
+        {% if form.errors %}
+        <div>
+            {{ form.errors }}
+        </div>
+        {% endif %}
 
-<button type="submit" class="btn btn-primary">Continue to Profile</button>
-</div>
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        {% comment %} Potentially refactor the above for easier styling {% endcomment %}
+        {% comment %} <div>
+            <h3>Support Needed:</h3>
+            {{ form.support_needed }}
+        </div> {% endcomment %}
+
+        <div>
+            <p>Thanks for planting the first seed!</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Continue to Profile</button>
+
+    </form>
 
 {% endblock %}
