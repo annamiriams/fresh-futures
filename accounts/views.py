@@ -37,7 +37,6 @@ def loginView(request):
         if user is not None:
             # If the user is authenticated, log them in
             login(request, user)
-            messages.success(request, 'Login successful!')
             return redirect('home')
         else: # Invalid credentials
             # If authentication fails, show an error message
