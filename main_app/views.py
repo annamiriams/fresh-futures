@@ -8,6 +8,9 @@ from .forms import GardenForm
 def home(request):
     return render(request, 'main_app/home.html')
 
+def start(request):
+    return render(request, 'main_app/start.html')
+
 class GardenCreate(CreateView):
     model = Garden
     form_class = GardenForm
