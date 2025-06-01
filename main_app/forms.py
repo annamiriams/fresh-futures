@@ -33,4 +33,6 @@ class GardenForm(forms.ModelForm):
             'support_needed', 
             'timeline',
         ] 
-        
+        widgets = {
+            'timeline': forms.RadioSelect(attrs={'class': 'timeline-radio'}),
+        }

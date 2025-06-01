@@ -6,11 +6,11 @@
 {% block content %}
 <div class='container survey-container'>
     <h1 class="hero-secion instrument-serif header-text">Where ya at?</h1>
-    
+
     <div class='survey'>
 
         <div>
-            <p class='bold'>Help us get to know more about you and your goals.</p>
+            <p class='text-lg'>Help us get to know more about you and your goals.</p>
         </div>
 
         <form action="" method="post" class="form-container">
@@ -23,43 +23,56 @@
             </div>
             {% endif %}
 
-            <div>
+            <div class='survey-question form-input'>
                 <p>What do you want your garden to be named?</p>
                 {{ form.name }}
             </div>
-            <div>
-                <p>Garden address:</p>
+            {% comment %} Add some kind of error logic based on mapping abilities... {% endcomment %}
+            <div class='survey-question form-input'>
+                <p>Garden address (if applicable):</p>
                 {{ form.address }}
             </div>
-            <div>
+            <div class='survey-question'>
                 <p>What are your main goals for this garden? (Select all that apply.)</p>
                 {{ form.goals }}
             </div>
-            <div>
+            <div class='survey-question form-input'>
                 <p>Don't see your goal listed? Add it here!</p>
                 {{ form.other_goal }}
             </div>
-            <div>
+            <div class='survey-question'>
                 <p>What are you wishing to grow? (Select all that apply.)</p>
                 {{ form.plants_to_grow }}
             </div>
-            <div>
+            <div class='survey-question'>
                 <p>What kind of support do you need to get started? (Select all that apply.)</p>
                 {{ form.support_needed }}
             </div>
-            <div>
-                <p>How soon are you hoping to get started?</p>
-                {{ form.timeline }}
+            <div class='radio-container'>
+                {% comment %} I can't figure out why this p font size isn't matching all the others... {% endcomment %}
+                <p style='font-size: 2.25rem'>How soon are you hoping to get started?</p>
+                <div class="radio-group">
+                    {% for radio in form.timeline %}
+                    <div class="radio-option">
+                        {{ radio.tag }}
+                        <label class="radio-button" for="{{ radio.id_for_label }}">
+                            {{ radio.choice_label }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
 
-
-            <div class="instrument-serif text-lg">
-                <p>Thanks for planting the first seed!</p>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Continue to Profile</button>
-
-        </form>
     </div>
 
-    {% endblock %}
+
+    <div class="instrument-serif text-lg">
+        <p>Thanks for planting the first seed!</p>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Continue to Profile</button>
+
+    </form>
+</div>
+
+{% endblock %}
