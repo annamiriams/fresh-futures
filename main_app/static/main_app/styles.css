@@ -170,13 +170,17 @@ body {
   display: block;
 }
 
-.form-input input {
+.form-input input,
+.form-input textarea {
   width: 90%;
+  max-height: 8rem;
   padding: 1rem;
   border-radius: 1rem;
   border: 1px solid #000;
   font-size: 2rem;
   margin-top: 1rem;
+  /* Adding so resizing cannot occur horizontally and message up the styling of the rest of the page. */
+  resize: vertical;
 }
 
 .form-input input[type="checkbox"] {
@@ -191,4 +195,75 @@ body {
   font-size: 2.5rem;
   text-align: center;
   margin-top: 1rem;
+}
+
+/* Survey */
+.survey-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    /* Adding this just to add some needed spacing at the bottom of the page. */
+    margin-bottom: 30rem;
+}
+
+.survey-question {
+    padding: 10px;
+}
+
+.survey {
+    align-items: left;
+    text-align: left;
+}
+
+textarea {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Custom radio buttons (for user experience and garden experience) */
+.radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.radio-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* Remove auto styling for radio buttons. */
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+.radio-button {
+    border: 1px solid #D1D5DB;
+    padding: 15px 25px;
+    border-radius: 9999px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    transition: all 0.2s ease-in-out;
+    display: inline-block;
+    text-align: center;
+    min-width: 180px;
+}
+
+/* Change radius color on hover. */
+.radio-button:hover {
+    border-color: #888;
+}
+
+/* Styling for selected button. */
+.radio-option input[type="radio"]:checked+.radio-button {
+    background-color: black;
+    color: white;
 }
