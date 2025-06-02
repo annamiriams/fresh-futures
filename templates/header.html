@@ -3,13 +3,15 @@
 
 <!-- Top navigation bar -->
 <nav class="navbar">
-  <div class="logo-container">
-    <a href="">
-      <div class="logo">
-        <img src="{% static 'main_app/images/FF-Logo-img.png' %}" alt="Logo" class="logo" />
-        <p class="inline">Fresh Futures</p>
-      </div>
-    </a>
+  <div class="logo-container" style="display: flex; justify-content: space-between; align-items: center">
+    <div>
+      <a href="">
+        <div class="logo">
+          <img src="{% static 'main_app/images/FF-Logo-img.png' %}" alt="Logo" class="logo" />
+          <p class="inline">Fresh Futures</p>
+        </div>
+      </a>
+    </div>
     <div id="menuToggle">
       <input type="checkbox" id="menuCheckbox" />
       <!-- These are the 3 lines that make up the hamburger menu icon -->
@@ -25,7 +27,7 @@
         </li>
         <li>
           <a href="{% url 'login' %}">
-            <label for="menuCheckbox" onclick="this.parentNode.click();">Sign In</label>
+            <label for="menuCheckbox" onclick="this.parentNode.click();">Login</label>
           </a>
         </li>
         {% endif %}
