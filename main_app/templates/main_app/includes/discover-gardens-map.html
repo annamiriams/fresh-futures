@@ -1,0 +1,162 @@
+{% load static %}
+
+<!-- Discover Gardens Map - Shows all gardens with search -->
+<!-- Include this in the discover gardens template -->
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+
+<!-- Custom map styles -->
+<link rel="stylesheet" href="{% static 'main_app/css/map-styles.css' %}">
+
+<div class="map-container">
+    <!-- Search functionality -->
+    <div class="address-search">
+        <input type="text" 
+               id="garden-search-input" 
+               placeholder="Search gardens by name, location, or creator..."
+               autocomplete="off">
+        <button type="button" id="find-near-me-btn" style="
+            width: 100%; 
+            margin-top: 8px; 
+            padding: 8px; 
+            background: #000; 
+            color: #fff; 
+            border: none; 
+            border-radius: 1rem; 
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        ">Find Gardens Near Me</button>
+    </div>
+    
+    <!-- Map element for discovery -->
+    <div id="discover-gardens-map" class="map-discover"></div>
+    
+    <!-- Results summary -->
+    <div id="search-results-summary" style="
+        padding: 1rem; 
+        background: #f5f5f5; 
+        border-radius: 1rem; 
+        margin-top: 10px;
+        font-family: 'Inter', sans-serif;
+        display: none;
+    ">
+        <span id="results-count">0 gardens found</span>
+    </div>
+</div>
+
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<!-- Our map components -->
+<script src="{% static 'main_app/js/map-components.js' %}"></script>
+<script src="{% static 'main_app/js/garden-map.js' %}"></script>
+
+<script>
+    // Set Mapbox token
+    window.MAPBOX_TOKEN = '{{ mapbox_token }}';
+    
+    // Initialize discovery map when page loads  
+    document.addEventListener('DOMContentLoaded', function() {
+        // Convert Django garden queryset to JavaScript array for map display
+        // Only includes gardens that pass any filtering applied in the Django view
+    const gardensData = [
+        const gardensData = [
+            {% for garden in gardens %}
+            {
+                // Garden model data converted to JavaScript object
+                id: {{ garden.id }},
+                name: "{{ garden.name|escapejs }}", // escapejs prevents XSS attacks from user input
+                description: "{{ garden.description|escapejs }}",
+                address: "{{ garden.address|escapejs }}",
+                latitude: {{ garden.latitude|default:"null" }},
+                longitude: {{ garden.longitude|default:"null" }},
+                created_by_name: "{{ garden.created_by.get_full_name|escapejs }}",
+                timeline: "{{ garden.timeline|escapejs }}"
+            }{% if not forloop.last %},{% endif %} // Add comma between objects, not after last one
+            {% endfor %}
+        ];
+        
+        // User location if available
+        const userLocation = {% if user.is_authenticated and user.latitude and user.longitude %}{
+            lat: {{ user.latitude }},
+            lng: {{ user.longitude }}
+        }{% else %}null{% endif %};
+        
+        // Initialize discovery map
+        const discoveryMap = new GardenMap('discover-gardens-map');
+        // Discovery mode shows multiple gardens with clustering and search functionality
+        discoveryMap.initDiscoverMode(gardensData, userLocation);
+        
+        // Update results summary
+        updateResultsSummary(gardensData.length);
+        
+        // Set up "Find Near Me" functionality
+        const findNearMeBtn = document.getElementById('find-near-me-btn');
+        if (findNearMeBtn) {
+            findNearMeBtn.addEventListener('click', function() {
+                this.textContent = 'Finding your location...';
+                this.disabled = true;
+                
+                // Request user's current location via browser geolocation API
+                discoveryMap.getUserLocation((error, location) => {
+                    if (error) {
+                        alert('Could not get your location: ' + error);
+                        this.textContent = 'Find Gardens Near Me';
+                        this.disabled = false;
+                        return;
+                    }
+                    
+                    // Center map on user location
+                    discoveryMap.centerOn(location.lat, location.lng, 12);
+                    discoveryMap.addUserLocationMarker(location.lat, location.lng);
+                    
+                    // Filter to show only gardens within 10 miles
+                    const nearbyGardens = discoveryMap.findNearbyGardens(location.lat, location.lng, 10);
+                    discoveryMap.displayGardens(nearbyGardens);
+                    
+                    // Update results summary and button functionality
+                    updateResultsSummary(nearbyGardens.length, 'within 10 miles of you');
+                    this.textContent = 'Show All Gardens';
+                    this.disabled = false;
+                    
+                    //  Transform button to show all gardens
+                    this.onclick = function() {
+                        discoveryMap.displayGardens(gardensData);
+                        updateResultsSummary(gardensData.length);
+                        this.textContent = 'Find Gardens Near Me';
+                        this.onclick = arguments.callee.caller; // Reset to original function
+                    };
+                });
+            });
+        }
+        
+         // Helper function to update the results counter display
+        function updateResultsSummary(count, extra = '') {
+            const summary = document.getElementById('search-results-summary');
+            const countSpan = document.getElementById('results-count');
+            
+            if (summary && countSpan) {
+                // Handle singular/plural grammar: "1 garden" vs "2 gardens"
+                countSpan.textContent = `${count} garden${count !== 1 ? 's' : ''} found${extra ? ' ' + extra : ''}`;
+                summary.style.display = 'block';
+            }
+        }
+        
+        // Override the garden map's filter function to update summary
+        // This ensures the counter updates when user searches/filters gardens
+        const originalFilterGardens = discoveryMap.filterGardens;
+        discoveryMap.filterGardens = function(query) {
+            // Call the original filter function first
+            originalFilterGardens.call(this, query);
+            
+            // Count visible markers to update summary
+            const visibleCount = this.gardenMarkers.length;
+            updateResultsSummary(visibleCount, query ? `matching "${query}"` : '');
+        };
+    });
+</script>
