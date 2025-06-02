@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main_app/styles.css' %}" />
+{% endblock %}
+{% block content %}
+<div class='container survey-container'>
+    <h1 class="hero-secion instrument-serif header-text">Tell us more...</h1>
+
+    <div class='survey'>
+
+        <form action="" method="post" class="form-container">
+            {% csrf_token %}
+
+            {% comment %} Adding validation error check {% endcomment %}
+            {% if form.errors %}
+            <div>
+                {{ form.errors }}
+            </div>
+            {% endif %}
+            <div class='radio-container'>
+                <p class='text-lg'>What is your experience level in gardening?</p>
+                <div class="radio-group">
+                    {% for radio in form.experience %}
+                    <div class="radio-option">
+                        {{ radio.tag }}
+                        <label class="radio-button" for="{{ radio.id_for_label }}">
+                            {{ radio.choice_label }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% comment %} Refactor the code below to match location-gathering data. Use garden_form as further reference if needed. {% endcomment %}
+            {% comment %} <div class='survey-question'>
+                <p class='text-lg'>What kind of support do you need to get started? (Select all that apply.)</p>
+                {{ form.support_needed }}
+            </div> {% endcomment %}
+            
+    </div>
+
+    <button type="submit" class="btn btn-secondary">Continue</button>
+    </form>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
+</div>
+{% endblock%}
