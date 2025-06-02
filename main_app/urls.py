@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('/start/', views.start, name='start'),
+    path('start/', views.start, name='start'),
+    path('start/survey/', views.GardenCreate.as_view(), name='garden-create'),
 ]
