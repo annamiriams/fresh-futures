@@ -4,11 +4,13 @@
 # These functions add variables to every template context automatically
 
 from django.conf import settings
+import os
 
 def mapbox_token(request):
-    # Add Mapbox access token to all template contexts
-    # This allows us to use {{ mapbox_token }} in any template
+    token = getattr(settings, 'MAPBOX_ACCESS_TOKEN', '')
+    print(f"DEBUG: Context processor token = {token}")
+    print(f"DEBUG: Raw env var = {os.getenv('MAPBOX_ACCESS_TOKEN')}")
     
     return {
-        'mapbox_token': getattr(settings, 'MAPBOX_ACCESS_TOKEN', '')
+        'mapbox_token': token
     }
