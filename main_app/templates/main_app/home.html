@@ -24,9 +24,11 @@
       </div>
       <div class="right-col">
         <p>Ready to get your hands dirty? Let's grow food, connection, and something that lasts.</p>
-        <a href="{% url 'start' %}">
+        {% comment %} <a href="{% url 'user-update' %}">
           <button class="btn btn-primary">Start a Garden</button>
-        </a>
+        </a> {% endcomment %}
+        <a href="{% url 'user-update' %}" class="btn btn-primary">Start a Garden</a>
+        
       </div>
     </div>
     <div class="grid-row mt-2">

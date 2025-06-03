@@ -141,14 +141,12 @@
   </div>
 </div>
 
-<div class="acc-button-container">
-  <a href="{% url 'garden-create' %}">
-    <button class="btn btn-primary">Get Started!</button>
-  </a>
-  <br />
-  <a href="{% url 'home' %}">
-    <button class="btn btn-primary">Return to Home</button>
-  </a>
+<div>
+
+<a href="{% url 'garden-create' %}" class="btn btn-secondary">Continue</a>
+<br />
+<a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
+
 </div>
 
 {% comment %} Need to place after the content block to ensure the JS file runs
