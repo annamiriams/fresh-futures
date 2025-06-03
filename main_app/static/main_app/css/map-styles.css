@@ -1,0 +1,289 @@
+/* Fresh Futures Map Styles - trying to match main app design */
+
+/* Base map container styling */
+.map-container {
+    position: relative;
+    margin: 20px 0;
+    border-radius: 2rem; /* Matches button border-radius */
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Main map element */
+.map {
+    height: 400px;
+    width: 100%;
+    border-radius: 2rem;
+}
+
+/* Small map for gardener profile */
+.map-profile {
+    height: 250px;
+    width: 100%;
+    border-radius: 2rem;
+}
+
+/* Large map for discover gardens page */
+.map-discover {
+    height: 500px;
+    width: 100%;
+    border-radius: 2rem;
+}
+
+/* Address search input styling - matches form design */
+.address-search {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem; /* Matches form input border-radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #000; /* Matches form input border */
+    width: 300px;
+}
+
+.address-search input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #000; /* Matches form styling */
+    border-radius: 1rem;
+    font-size: 1.5rem; /* Matches form font sizes */
+    font-family: "Inter", sans-serif; /* Matches body font */
+}
+
+.address-search input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Search results dropdown */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1001;
+}
+
+.search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+/* Map instructions */
+.map-instructions {
+    background: #e8f4f8;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #2c5530;
+    border-left: 4px solid #4CAF50;
+}
+
+.map-instructions strong {
+    color: #1a4a1e;
+}
+
+/* Custom marker styles */
+.garden-marker {
+    background: transparent;
+    border: none;
+}
+
+.garden-marker-inner {
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.user-location-marker {
+    background: transparent;
+    border: none;
+}
+
+.user-marker-inner {
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Garden popup styles */
+.garden-popup {
+    font-family: "Inter", sans-serif;
+    max-width: 250px;
+}
+
+.garden-popup-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    color: #000;
+}
+
+.garden-popup-description {
+    font-size: 0.9rem;
+    margin: 0 0 10px 0;
+    color: #666;
+}
+
+.garden-popup-details {
+    font-size: 0.8rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+.garden-popup-details p {
+    margin: 4px 0;
+}
+
+.garden-popup-actions {
+    margin-top: 10px;
+}
+
+.garden-popup-link {
+    background-color: #000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+.garden-popup-link:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+/* Loading state for map */
+.map-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Error state for map */
+.map-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    color: #c00;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Selected location display */
+.selected-location {
+    background: #f0f8f0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #4CAF50;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.selected-location .location-address {
+    font-weight: bold;
+    color: #2c5530;
+}
+
+.selected-location .location-coords {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .address-search {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+        top: 0;
+        left: 0;
+    }
+    
+    .map {
+        height: 300px;
+    }
+    
+    .map-large {
+        height: 350px;
+    }
+}
+
+/* Custom Leaflet popup styling */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+}
+
+.leaflet-popup-content {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* Custom control button styling */
+.leaflet-control-custom {
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+    padding: 5px;
+    margin: 10px;
+}
+
+.leaflet-control-custom button {
+    background: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.leaflet-control-custom button:hover {
+    background: #f5f5f5;
+}
