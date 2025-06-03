@@ -33,10 +33,13 @@
             </div>
             
             {% comment %} Refactor the code below to match location-gathering data. Use garden_form as further reference if needed. {% endcomment %}
-            {% comment %} <div class='survey-question'>
-                <p class='text-lg'>What kind of support do you need to get started? (Select all that apply.)</p>
-                {{ form.support_needed }}
-            </div> {% endcomment %}
+            <div class='survey-question'>
+                <p class='text-lg'>Zip code:</p>
+
+                {% comment %} Placeholder below for commented out code to render location on the page. See errors above before refactoring. {% endcomment %}
+                <input type="text" class='survey-question form-input'>
+                {% comment %} {{ form.location }} {% endcomment %}
+            </div>
             
     </div>
 

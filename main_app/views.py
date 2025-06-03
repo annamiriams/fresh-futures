@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Garden, User
 from django.views.generic.edit import CreateView, UpdateView
 from .forms import GardenForm, UserForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 def home(request):
@@ -14,7 +15,8 @@ def start(request):
 class UserUpdate(UpdateView):
     model = User
     form_class = UserForm
-    success_url = '/'
+    # reverse_lazy doesn't generate a URL immediately (ie 'lazily'). Used in particular in CBV success_urls
+    success_url = reverse_lazy('start')
     
     # Update only the logged-in user.
     def get_object(self):

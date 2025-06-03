@@ -43,6 +43,7 @@ class UserForm(forms.ModelForm):
         fields = [
             'experience',
             # I get an error when I have this added noting that this is not a field that can be updated.
+            # https://stackoverflow.com/questions/62695029/fielderror-created-cannot-be-specified-for-post-model-form-as-it-is-a-non-edi
             # 'location'
         ]
         widgets = {
