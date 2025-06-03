@@ -1,6 +1,8 @@
-{% extends "layout.html" %} {% load static %} {% block content %}
+{% extends "layout.html" %} 
+{% load static %} 
+{% block content %}
 
-<div class="container">
+<div class="accordion-container">
   <h1>Take the First Step Towards Building Your Community Garden</h1>
 
   <div class="accordion">
@@ -115,26 +117,41 @@
     <div class="accordion-button">
       <button><strong> Step 7:</strong> Build the Basics</button>
     </div>
+    <div class="accordion-content">
+      <p>
+        Start small. Set up raised beds or dig garden rows. Lay cardboard or
+        mulch paths. Start planting easy things like lettuce, kale, or herbs.
+      </p>
+    </div>
   </div>
 
   <div class="accordion">
     <div class="accordion-button">
       <button><strong> Step 8:</strong> Keep it Going</button>
     </div>
+    <div class="accordion-content">
+      <p>Stay connected with your group.</p>
+      <ul>
+        <li> 🌧 Set watering schedules</li>
+        <li> 🍅 Share the harvest</li>
+        <li> 🧡 Welcome new helpers</li>
+        <li> 🎉 Celebrate your wins (even the little ones)</li>
+      </ul>
+    </div>
   </div>
 </div>
 
-<div>
-    {% comment %}
-<a href="{% url '' %}"> Need to add link to redirect to survey page </a> 
-{% endcomment %}
-
-<button class="btn btn-primary">Get Started!</button>
-<br />
-<a href="{% url 'home' %}">
-  <button class="btn btn-primary">Return to Home</button>
-</a>
+<div class="acc-button-container">
+  <a href="{% url 'garden-create' %}">
+    <button class="btn btn-primary">Get Started!</button>
+  </a>
+  <br />
+  <a href="{% url 'home' %}">
+    <button class="btn btn-primary">Return to Home</button>
+  </a>
 </div>
 
+{% comment %} Need to place after the content block to ensure the JS file runs
+after the DOM is loaded. Placing it at top was causing issues. {% endcomment %}
+<script src="{% static 'main_app/start-accordion.js' %}"></script>
 {% endblock %}
-

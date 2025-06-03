@@ -267,3 +267,65 @@ textarea {
     background-color: black;
     color: white;
 }
+
+.accordion-container {
+  padding: 6px 10px 6px 10px;
+  gap: 10px;
+}
+
+.accordion-container h1 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.accordion {
+  border: 1px solid #000; 
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin-bottom: 1.5rem; 
+  background-color: #fff;
+}
+
+.accordion-button button {
+  background-color: #fff; 
+  width: 100%;
+  padding: 15px;
+  border: none; 
+  text-align: left;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer; 
+  font-weight: bold;
+}
+
+.accordion-content {
+  max-height: 0; /* Setting to 0 so that accordion-content is hidden by default */
+  overflow: hidden; /* This hides the content when the accordion is closed */
+  opacity: 0; /* This makes the content invisible when the accordion is closing */
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  padding: 0 16px; 
+  gap: 24px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.accordion.open .accordion-content {  
+  max-height: 1000px;
+  opacity: 1;
+  padding: 16px;
+}
+
+.acc-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
