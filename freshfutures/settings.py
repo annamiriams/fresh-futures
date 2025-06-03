@@ -12,13 +12,28 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Manual .env loading (more reliable than python-dotenv in this 
+env_file = BASE_DIR / '.env'
+print(f"DEBUG: Looking for .env at: {env_file}")
+print(f"DEBUG: .env exists: {env_file.exists()}")
+
+if env_file.exists():
+    with open(env_file, 'r') as f:
+        content = f.read()
+        print(f"DEBUG: .env content length: {len(content)}")
+        
+    with open(env_file, 'r') as f:
+        for line_num, line in enumerate(f, 1):
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                key, value = line.split('=', 1)
+                os.environ[key] = value  # Use direct assignment instead of setdefault
+                print(f"DEBUG: Set {key} = {value[:20]}...")
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,6 +41,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+
+# Mapbox Configuration
+MAPBOX_ACCESS_TOKEN = os.getenv('MAPBOX_ACCESS_TOKEN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -71,6 +89,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Add this line to make mapbox_token available in all templates
+                'main_app.context_processors.mapbox_token',
             ],
         },
     },
@@ -140,3 +160,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Adding to support AbstractUser
 AUTH_USER_MODEL = 'main_app.User'
+

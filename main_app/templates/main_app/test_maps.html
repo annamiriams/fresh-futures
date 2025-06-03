@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fresh Futures - Map Testing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    
+    <!-- existing styles -->
+    <link rel="stylesheet" href="{% static 'main_app/styles.css' %}">
+    
+    <style>
+        .test-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            border: 2px solid #000;
+            border-radius: 2rem;
+        }
+        
+        .test-header {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .test-description {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .scenario-info {
+            background: #f0f8f0;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header-text instrument-serif">Fresh Futures Map Testing</h1>
+        <p class="hero-section">Testing both map components to ensure they work correctly.</p>
+        
+        <!-- Test Scenario 1: Discover Gardens Map -->
+        <div class="test-section">
+            <div class="test-header">1. Discover Gardens Map</div>
+            <div class="test-description">
+                This map shows all gardens in the system with search and "find near me" functionality.
+            </div>
+            
+            <div class="scenario-info">
+                <strong>Test Data:</strong> {{ test_scenarios.0.gardens_count }} gardens loaded<br>
+                <strong>Features to test:</strong> 
+                <ul>
+                    <li>Search gardens by name/location</li>
+                    <li>"Find Gardens Near Me" button (requires location permission)</li>
+                    <li>Click garden markers for details</li>
+                    <li>Map should show all gardens and fit to bounds</li>
+                </ul>
+            </div>
+            
+            <!-- Include discover gardens map -->
+            {% include 'main_app/includes/discover-gardens-map.html' %}
+        </div>
+        
+        <!-- Test Scenario 2: Gardener Profile Map -->
+        <div class="test-section">
+            <div class="test-header">2. Gardener Profile Map</div>
+            <div class="test-description">
+                This map shows a specific gardener's gardens and their personal location.
+            </div>
+            
+            <div class="scenario-info">
+                <strong>Test Gardener:</strong> {{ gardener.get_full_name }}<br>
+                <strong>Gardener's Gardens:</strong> {{ test_scenarios.1.gardens_count }} gardens<br>
+                <strong>Features to test:</strong>
+                <ul>
+                    <li>Shows gardener's personal location marker ("You")</li>
+                    <li>Shows all of their gardens</li>
+                    <li>Map centers/fits to show their content</li>
+                    <li>Works even if gardener has no gardens</li>
+                </ul>
+            </div>
+            
+            <!-- Include gardener profile map -->
+            {% include 'main_app/includes/gardener-profile-map.html' %}
+        </div>
+        
+        <!-- Test Controls -->
+        <div class="test-section">
+            <div class="test-header">3. Test Controls</div>
+            <div class="test-description">
+                Use these buttons to test different scenarios.
+            </div>
+            
+            <button class="btn btn-primary" onclick="testEmptyGardener()">
+                Test Gardener with No Gardens
+            </button>
+            
+            <button class="btn btn-primary" onclick="testNoLocation()" style="margin-left: 1rem;">
+                Test No Location Data
+            </button>
+            
+            <button class="btn btn-primary" onclick="reloadMaps()" style="margin-left: 1rem;">
+                Reload Maps
+            </button>
+        </div>
+        
+        <!-- Console Output -->
+        <div class="test-section">
+            <div class="test-header">4. Console Output</div>
+            <div class="test-description">
+                Check your browser's developer console (F12) for map initialization messages and any errors.
+            </div>
+            
+            <div id="test-log" style="
+                background: #f5f5f5; 
+                padding: 1rem; 
+                border-radius: 1rem; 
+                font-family: monospace; 
+                font-size: 0.9rem;
+                max-height: 200px;
+                overflow-y: auto;
+            ">
+                <div>Map testing page loaded...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Test functions
+        function testEmptyGardener() {
+            alert('To test: Modify the view to use a gardener with no gardens');
+            logMessage('Testing empty gardener scenario');
+        }
+        
+        function testNoLocation() {
+            alert('To test: Modify the view to use a gardener with no location data');
+            logMessage('Testing no location scenario');
+        }
+        
+        function reloadMaps() {
+            location.reload();
+        }
+        
+        function logMessage(message) {
+            const log = document.getElementById('test-log');
+            const timestamp = new Date().toLocaleTimeString();
+            log.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        // Override console.log to capture map messages
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            logMessage(args.join(' '));
+        };
+        
+        // Log page load
+        document.addEventListener('DOMContentLoaded', function() {
+            logMessage('DOM loaded, maps should be initializing...');
+        });
+    </script>
+</body>
+</html>
