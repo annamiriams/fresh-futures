@@ -4,13 +4,7 @@
   <h1 class="instrument-serif header-text">Login</h1>
   
   <!-- Displaying feedback notifications so the end user so they understand requirements/constraints -->
-  {% if messages %}
-  <div>
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags}}">{{message}}</div>
-    {% endfor %}
-  </div>
-  {% endif %}
+ 
   <form method="POST" class="form">
     {% csrf_token %}
     <div class="form-input">
@@ -20,10 +14,6 @@
     <div class="form-input">
       <label>Password</label>
       <input type="password" name="password" required />
-    </div>
-    <div class="form-input flex items-start gap-4">
-      <input type="checkbox" name="terms" required />
-      <label> I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>. </label>
     </div>
     <button class="btn btn-primary" type="submit">Continue</button>
     <p class="">Don't have an account? <a href="{% url 'register' %}">Register</a></p>

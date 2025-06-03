@@ -1,0 +1,136 @@
+{% extends "layout.html" %} {% load static %} {% block content %}
+
+<div class="container">
+  <h1>Take the First Step Towards Building Your Community Garden</h1>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 1:</strong> Find Your People</button>
+    </div>
+    <div class="accordion-content">
+      <p>
+        Ask around--friends, neighbors, local groups. Even 2-3 people is enough
+        to begin.
+      </p>
+      <p>
+        <strong> Why it matters:</strong> A garden grows best when more people
+        care for it.
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 2:</strong> Find a Spot</button>
+    </div>
+    <div class="accordion-content">
+      <p>Look for unused land with good sun and water access.</p>
+      <strong> These are good places to look:</strong>
+      <ul>
+        <li>Schoolyards</li>
+        <li>Empty lots</li>
+        <li>Church lawns</li>
+      </ul>
+      <p><strong> 🌞 Must have </strong> at least 6 hours of sunlight</p>
+      <p><strong> 🚰 Bonus </strong> if it's near a hose or water line</p>
+      <p>
+        <strong> Pro tip: </strong> Visit a few times a day to see how the light
+        hits. Snap photos. Take notes.
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 3:</strong> Check the Details</button>
+    </div>
+    <div class="accordion-content">
+      <p><strong>Before digging, find out:</strong></p>
+      <ul>
+        <li>Who owns the land? (Look up records or ask a neighbor)</li>
+        <li>Can we grow food there? (Ask the city if it's allowed)</li>
+        <li>Is the soil safe? (Some cities test soil for free!)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 4:</strong> Talk to the City</button>
+    </div>
+    <div class="accordion-content">
+      <p>Your city or town might help more than you think.</p>
+      <p>
+        <strong>Ask about:</strong>
+      </p>
+      <ul>
+        <li>Using public land</li>
+        <li>Free compost or mulch</li>
+        <li>Permits or approcals you'll need</li>
+      </ul>
+      <p>
+        Bring a simple plan when you ask -- they'll take you more seriously.
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 5:</strong> Make a Plan</button>
+    </div>
+    <div class="accordion-content">
+      <p>This doesn't have to be fancy.</p>
+
+      <strong>Just write down:</strong>
+      <ul>
+        <li>What you want to grow</li>
+        <li>What the space will look like (sketch it!)</li>
+        <li>When you'll get started</li>
+        <li>What you'll need (soil, water, tools, people)</li>
+      </ul>
+      <p>
+        This helps if you ask for help, apply for funding, or talk to city
+        officials.
+      </p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 6:</strong> Get Support</button>
+    </div>
+    <div class="accordion-content">
+      <p><strong>No money? No problem. Try:</strong></p>
+      <ul>
+        <li>Asking local hardware stores for donations</li>
+        <li>Hosting a yard sale or small fundraiser</li>
+        <li>Looking up garden grants</li>
+        <li>Swapping tools with neighbors</li>
+        <li>Using recycled materials for beds</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 7:</strong> Build the Basics</button>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-button">
+      <button><strong> Step 8:</strong> Keep it Going</button>
+    </div>
+  </div>
+</div>
+
+<div>
+
+<a href="{% url 'garden-create' %}" class="btn btn-secondary">Continue</a>
+<br />
+<a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
+
+</div>
+
+{% endblock %}
+

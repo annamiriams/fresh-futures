@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from .forms import RegisterUserForm
 
@@ -25,7 +25,7 @@ def registerView(request):
     } 
     return render(request, 'accounts/register.html', context)
 
-# Login View
+# Login User (View)
 def loginView(request):
     # If the form is submitted then the code below will run
     if request.method == 'POST':
@@ -37,7 +37,6 @@ def loginView(request):
         if user is not None:
             # If the user is authenticated, log them in
             login(request, user)
-            messages.success(request, 'Login successful!')
             return redirect('home')
         else: # Invalid credentials
             # If authentication fails, show an error message
@@ -45,6 +44,7 @@ def loginView(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-# Logout View (not implemented yet, this is just a placeholder)
+# Logout User (View)
 def logoutView(request):
-    return render(request, 'accounts/logout.html')
+    logout(request)
+    return redirect("home")
