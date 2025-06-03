@@ -1,5 +1,5 @@
 from django import forms
-from .models import Garden, GoalOption, PlantOption, SupportOption
+from .models import Garden, GoalOption, PlantOption, SupportOption, User
 
 class GardenForm(forms.ModelForm):
     goals = forms.ModelMultipleChoiceField(
@@ -35,4 +35,17 @@ class GardenForm(forms.ModelForm):
         ] 
         widgets = {
             'timeline': forms.RadioSelect(attrs={'class': 'timeline-radio'}),
+        }
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'experience',
+            # I get an error when I have this added noting that this is not a field that can be updated.
+            # https://stackoverflow.com/questions/62695029/fielderror-created-cannot-be-specified-for-post-model-form-as-it-is-a-non-edi
+            # 'location'
+        ]
+        widgets = {
+            'experience': forms.RadioSelect(attrs={'class': 'experience-radio'}),
         }
