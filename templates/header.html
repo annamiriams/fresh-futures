@@ -5,9 +5,9 @@
 <nav class="navbar">
   <div class="logo-container" style="display: flex; justify-content: space-between; align-items: center">
     <div>
-      <a href="">
+      <a href="{% url 'home' %}">
         <div class="logo">
-          <img src="{% static 'main_app/images/FF-Logo-img.png' %}" alt="Logo" class="logo" />
+          <img src="{% static 'main_app/images/FF-Logo-img.png' %}" alt="Fresh Futures Logo" class="logo" />
           <p class="inline">Fresh Futures</p>
         </div>
       </a>
@@ -46,6 +46,12 @@
           <label for="menuCheckbox"><a>Learn with BeetBot</a></label>
         </li>
         {% if user.is_authenticated %}
+        <li>
+          <!-- Add Link to href for Profile -->
+          <a href="">
+            <label for="menuCheckbox" onclick="this.parentNode.click();">Profile</label>
+          </a>
+        </li>
         <li>
           <a href="{% url 'logout' %}">
             <label for="menuCheckbox" onclick="this.parentNode.click();">Logout</label>
