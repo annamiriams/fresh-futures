@@ -1,0 +1,74 @@
+{% load static %}
+
+<!-- Fresh Futures Map Base Template -->
+<!-- This template provides the foundation for all maps in the application -->
+
+<!-- Leaflet CSS - Load from CDN for reliability -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+
+<!-- Custom map styles -->
+<link rel="stylesheet" href="{% static 'main_app/css/map-styles.css' %}">
+
+<!-- Map container with dynamic class based on size -->
+<div class="map-container">
+    <!-- Map instructions (customizable via template context) -->
+    {% if map_instructions %}
+    <div class="map-instructions">
+        <strong>{{ map_instructions.title|default:"Map Instructions" }}</strong><br>
+        {{ map_instructions.text|default:"Click on the map to select a location, or search for an address above." }}
+    </div>
+    {% endif %}
+    
+    <!-- Address search box (show if enabled) -->
+    {% if enable_address_search %}
+    <div class="address-search">
+        <input type="text" 
+               id="address-search-input" 
+               placeholder="Search for an address..."
+               autocomplete="off">
+        <div id="search-results" class="search-results" style="display: none;"></div>
+    </div>
+    {% endif %}
+    
+    <!-- The actual map element -->
+    <div id="{{ map_id|default:'map' }}" 
+         class="map {{ map_size_class|default:'map' }}">
+        <!-- Loading state while map initializes -->
+        <div class="map-loading" id="map-loading">
+            Loading map...
+        </div>
+    </div>
+    
+    <!-- Selected location display (show if enabled) -->
+    {% if show_selected_location %}
+    <div id="selected-location" class="selected-location" style="display: none;">
+        <div class="location-address" id="selected-address">No location selected</div>
+        <div class="location-coords" id="selected-coords"></div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Leaflet JavaScript - Load from CDN -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<!-- Our custom map components -->
+<script src="{% static 'main_app/js/map-components.js' %}"></script>
+
+<!-- Initialize Mapbox token from Django settings -->
+<script>
+    // Make Mapbox token available globally for our map components
+    window.MAPBOX_TOKEN = '{{ mapbox_token }}';
+    
+    // Hide loading state once scripts are loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingElement = document.getElementById('map-loading');
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+    });
+</script>
+
