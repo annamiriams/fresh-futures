@@ -13,7 +13,7 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'experience']
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
@@ -21,6 +21,7 @@ class RegisterUserForm(UserCreationForm):
             'username': forms.TextInput(attrs={'placeholder': 'Username'}),
             'password1': forms.PasswordInput(),
             'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
+            'experience': forms.RadioSelect(attrs={'class': 'experience-radio'}),
         }
     
 # Login form
