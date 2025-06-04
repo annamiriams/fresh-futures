@@ -1,6 +1,4 @@
-{% extends "layout.html" %} 
-{% load static %} 
-{% block content %}
+{% extends "layout.html" %} {% load static %} {% block content %}
 
 <div class="accordion-container">
   <h1>Take the First Step Towards Building Your Community Garden</h1>
@@ -132,21 +130,20 @@
     <div class="accordion-content">
       <p>Stay connected with your group.</p>
       <ul>
-        <li> 🌧 Set watering schedules</li>
-        <li> 🍅 Share the harvest</li>
-        <li> 🧡 Welcome new helpers</li>
-        <li> 🎉 Celebrate your wins (even the little ones)</li>
+        <li>🌧 Set watering schedules</li>
+        <li>🍅 Share the harvest</li>
+        <li>🧡 Welcome new helpers</li>
+        <li>🎉 Celebrate your wins (even the little ones)</li>
       </ul>
     </div>
   </div>
 </div>
 
 <div>
-
-<a href="{% url 'garden-create' %}" class="btn btn-secondary">Continue</a>
-<br />
-<a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
-
+  <div class="acc-button-container">
+    <a href="{% url 'garden-create' %}" class="btn btn-secondary">Continue</a>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
+  </div>
 </div>
 
 {% comment %} Need to place after the content block to ensure the JS file runs
