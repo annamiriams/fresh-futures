@@ -10,8 +10,12 @@ def registerView(request):
         form = RegisterUserForm(request.POST)
         
         if form.is_valid():
-            print("Form is valid")
-            form.save()
+            # print("Form is valid")
+            # form.save()
+            # return redirect('login')
+            user = form.save(commit=False)
+            user.has_completed_onboarding = False
+            user.save()
             return redirect('login')
         else:
             print("Form is not valid")

@@ -7,6 +7,9 @@ class User(AbstractUser):
     # Django's built-in fields are inherited:
     # username, email, password, first_name, last_name, etc.
     
+    # Adding so we can integrate the user survey into the register survey.
+    has_completed_onboarding = models.BooleanField(default=False)
+    
     EXPERIENCE_LEVEL = [
         ('beginner', 'Beginner'),
         ('intermediate', 'Intermediate'),

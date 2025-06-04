@@ -218,8 +218,6 @@ body {
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
-  /* Adding this just to add some needed spacing at the bottom of the page. */
-  margin-bottom: 30rem;
 }
 
 .survey-question {
@@ -237,10 +235,14 @@ textarea {
   font-style: normal;
 }
 
+.zip {
+    display: flex;
+}
+
 /* Custom radio buttons (for user experience and garden experience) */
 .radio-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 }
