@@ -17,7 +17,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Manual .env loading (more reliable than python-dotenv in this 
+# Manual .env loading (more reliable than python-dotenv in this context)
 env_file = BASE_DIR / '.env'
 print(f"DEBUG: Looking for .env at: {env_file}")
 print(f"DEBUG: .env exists: {env_file.exists()}")
@@ -152,6 +152,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'main_app' / 'static',  # Tell Django to look in main_app/static
+]
+
+# For development
+if DEBUG:
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
