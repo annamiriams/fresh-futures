@@ -107,6 +107,25 @@ WSGI_APPLICATION = 'freshfutures.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# From GA instructions:
+# if 'ON_HEROKU' in os.environ:
+#     DATABASES = {
+#         "default": dj_database_url.config(
+#             env='DATABASE_URL',
+#             conn_max_age=600,
+#             conn_health_checks=True,
+#             ssl_require=True,
+#         ),
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'fresh_futures_db',
+#         }
+#     }
+
+# From ChatGPT about database for Heroku with PostGIS
 if 'ON_HEROKU' in os.environ:
     DATABASES = {
         "default": dj_database_url.config(
@@ -114,13 +133,15 @@ if 'ON_HEROKU' in os.environ:
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True,
+            engine='django.contrib.gis.db.backends.postgis',
         ),
     }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': 'fresh_futures_db',
+            # Add USER, PASSWORD, HOST, PORT if needed
         }
     }
 
