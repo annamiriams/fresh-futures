@@ -1,36 +1,54 @@
-/* Fresh Futures Map Styles - trying to match main app design */
+/* ===================================================================
+   FRESH FUTURES MAP STYLES
+   Consistent with main app design system
+   =================================================================== */
 
-/* Base map container styling */
+/* ===================================================================
+   BASE MAP CONTAINERS
+   =================================================================== */
+
 .map-container {
     position: relative;
     margin: 20px 0;
-    border-radius: 2rem; /* Matches button border-radius */
+    border-radius: 2rem;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Main map element */
+/* Default map size */
 .map {
     height: 400px;
     width: 100%;
     border-radius: 2rem;
 }
 
-/* Small map for gardener profile */
+/* Map size variations */
 .map-profile {
     height: 250px;
     width: 100%;
     border-radius: 2rem;
 }
 
-/* Large map for discover gardens page */
 .map-discover {
     height: 500px;
     width: 100%;
     border-radius: 2rem;
 }
 
-/* Address search input styling - matches form design */
+.garden-location-map {
+    height: 350px !important;
+    width: 100% !important;
+    border-radius: 1rem;
+    border: 2px solid #ddd;
+    margin: 1rem 0;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* ===================================================================
+   SEARCH FUNCTIONALITY
+   =================================================================== */
+
 .address-search {
     position: absolute;
     top: 10px;
@@ -38,19 +56,19 @@
     z-index: 1000;
     background: white;
     padding: 1rem;
-    border-radius: 1rem; /* Matches form input border-radius */
+    border-radius: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border: 1px solid #000; /* Matches form input border */
+    border: 1px solid #000;
     width: 300px;
 }
 
 .address-search input {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #000; /* Matches form styling */
+    border: 1px solid #000;
     border-radius: 1rem;
-    font-size: 1.5rem; /* Matches form font sizes */
-    font-family: "Inter", sans-serif; /* Matches body font */
+    font-size: 1.5rem;
+    font-family: "Inter", sans-serif;
 }
 
 .address-search input:focus {
@@ -87,14 +105,16 @@
     border-bottom: none;
 }
 
-/* Map instructions */
+/* ===================================================================
+   MAP INSTRUCTIONS & STATUS
+   =================================================================== */
+
 .map-instructions {
-    background: #e8f4f8;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #2c5530;
+    background: #f7faf7;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
     border-left: 4px solid #4CAF50;
 }
 
@@ -102,7 +122,113 @@
     color: #1a4a1e;
 }
 
-/* Custom marker styles */
+.location-status {
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    font-family: "Inter", sans-serif;
+}
+
+.location-status.success {
+    background: #f0f8f0;
+    border-color: #4CAF50;
+    color: #2c5530;
+}
+
+.location-status.warning {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.selected-location {
+    background: #f0f8f0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #4CAF50;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.selected-location .location-address {
+    font-weight: bold;
+    color: #2c5530;
+}
+
+.selected-location .location-coords {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* ===================================================================
+   MAP CONTROLS & BUTTONS
+   =================================================================== */
+
+.location-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.location-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.4s ease;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    margin: 0.5rem 0;
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.location-btn:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.location-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.location-btn-clear {
+    padding: 0.75rem 1.5rem;
+    background: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+.location-btn-clear:hover {
+    background: #999;
+    color: #fff;
+}
+
+/* ===================================================================
+   MARKERS & POPUPS
+   =================================================================== */
+
+/* Garden markers */
 .garden-marker {
     background: transparent;
     border: none;
@@ -121,6 +247,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
+/* User location markers */
 .user-location-marker {
     background: transparent;
     border: none;
@@ -190,70 +317,16 @@
     border: 1px solid #000;
 }
 
-/* Loading state for map */
-.map-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 400px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    color: #666;
-    font-style: italic;
-}
+/* ===================================================================
+   LEAFLET CUSTOMIZATION
+   =================================================================== */
 
-/* Error state for map */
-.map-error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 400px;
-    background-color: #fee;
-    border: 1px solid #fcc;
-    border-radius: 8px;
-    color: #c00;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Selected location display */
-.selected-location {
-    background: #f0f8f0;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #4CAF50;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.selected-location .location-address {
-    font-weight: bold;
-    color: #2c5530;
-}
-
-.selected-location .location-coords {
-    font-size: 12px;
-    color: #666;
-    margin-top: 4px;
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .address-search {
-        position: relative;
-        width: 100%;
-        margin-bottom: 10px;
-        top: 0;
-        left: 0;
-    }
-    
-    .map {
-        height: 300px;
-    }
-    
-    .map-large {
-        height: 350px;
-    }
+/* Leaflet container fixes */
+.garden-location-map .leaflet-container,
+#garden-location-map.leaflet-container {
+    height: 100% !important;
+    width: 100% !important;
+    position: relative;
 }
 
 /* Custom Leaflet popup styling */
@@ -264,6 +337,36 @@
 .leaflet-popup-content {
     font-family: inherit;
     font-size: 14px;
+}
+
+/* Leaflet controls */
+.leaflet-control-container {
+    pointer-events: auto !important;
+}
+
+.leaflet-top, .leaflet-bottom {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.leaflet-control {
+    pointer-events: auto;
+    position: relative;
+}
+
+.leaflet-control-zoom {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.leaflet-control-attribution {
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2px 5px;
+    font-size: 11px;
+    border-radius: 3px;
 }
 
 /* Custom control button styling */
@@ -286,4 +389,124 @@
 
 .leaflet-control-custom button:hover {
     background: #f5f5f5;
+}
+
+/* ===================================================================
+   SURVEY FORM OVERRIDES
+   =================================================================== */
+
+/* Override survey container interference with maps */
+.survey-container #garden-location-map,
+.survey #garden-location-map {
+    position: relative !important;
+    display: block !important;
+    height: 350px !important;
+    width: 100% !important;
+    max-width: none !important;
+    flex: none !important;
+    align-self: auto !important;
+    justify-self: auto !important;
+    text-align: left !important;
+    overflow: hidden !important;
+    border: 2px solid #ddd !important;
+    border-radius: 1rem !important;
+    margin: 1rem 0 !important;
+}
+
+/* Reset survey text centering that affects map */
+.survey-container #garden-location-map *,
+.survey #garden-location-map * {
+    text-align: left !important;
+    text-align-last: auto !important;
+}
+
+/* ===================================================================
+   STATE STYLES
+   =================================================================== */
+
+/* Loading state */
+.map-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Error state */
+.map-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 8px;
+    color: #c00;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN
+   =================================================================== */
+
+@media (max-width: 768px) {
+    /* Search adjustments */
+    .address-search {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+        top: 0;
+        left: 0;
+    }
+    
+    /* Map size adjustments */
+    .map {
+        height: 300px;
+    }
+    
+    .map-discover {
+        height: 350px;
+    }
+    
+    .garden-location-map {
+        height: 280px !important;
+    }
+    
+    /* Control adjustments */
+    .location-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .location-btn,
+    .location-btn-clear {
+        width: 100%;
+        margin: 0.25rem 0;
+    }
+    
+    /* Instruction adjustments */
+    .map-instructions {
+        font-size: 0.8rem;
+        padding: 0.75rem;
+    }
+}
+
+/* ===================================================================
+   UTILITY CLASSES
+   =================================================================== */
+
+.garden-location-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1rem;
+}
+
+.garden-form-map-container {
+    margin: 1rem 0;
 }

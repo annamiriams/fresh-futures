@@ -19,13 +19,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Manual .env loading (more reliable than python-dotenv in this context)
 env_file = BASE_DIR / '.env'
-print(f"DEBUG: Looking for .env at: {env_file}")
-print(f"DEBUG: .env exists: {env_file.exists()}")
 
 if env_file.exists():
     with open(env_file, 'r') as f:
         content = f.read()
-        print(f"DEBUG: .env content length: {len(content)}")
         
     with open(env_file, 'r') as f:
         for line_num, line in enumerate(f, 1):
@@ -33,7 +30,7 @@ if env_file.exists():
             if line and not line.startswith('#') and '=' in line:
                 key, value = line.split('=', 1)
                 os.environ[key] = value  # Use direct assignment instead of setdefault
-                print(f"DEBUG: Set {key} = {value[:20]}...")
+                
 
 
 # Quick-start development settings - unsuitable for production
