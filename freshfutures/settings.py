@@ -46,7 +46,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 MAPBOX_ACCESS_TOKEN = os.getenv('MAPBOX_ACCESS_TOKEN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if not 'ON_HEROKU' in os.environ:
+# if not 'ON_HEROKU' in os.environ:
+#     DEBUG = True
+    
+if 'ON_HEROKU' in os.environ:
+    DEBUG = False
+else:
     DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
