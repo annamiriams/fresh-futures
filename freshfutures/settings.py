@@ -182,6 +182,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
     BASE_DIR / 'main_app' / 'static',  # Tell Django to look in main_app/static
 ]
