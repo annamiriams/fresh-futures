@@ -16,7 +16,6 @@
 //  * Attribution: https://jsdoc.app/
 //  */
 
-
 class FreshFuturesMap {
     constructor(containerId, options = {}) {
         // Default options for the map
@@ -219,5 +218,67 @@ class FreshFuturesMap {
     }
 }
 
-// Export for use in other files
+/**
+ * Function-based geocoder to avoid CSP class definition issues
+ * * This prevents "unsafe-eval" CSP violations in strict security environments
+ */
+function FreshFuturesGeocoder() {
+    this.mapboxToken = window.MAPBOX_TOKEN;
+}
+
+/**
+ * Geocode an address to coordinates using Mapbox Geocoding API
+ */
+FreshFuturesGeocoder.prototype.geocodeAddress = async function(address, callback) {
+    try {
+        // encodeURIComponent handles special characters in addresses
+        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${this.mapboxToken}&limit=5`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.features && data.features.length > 0) {
+            const results = data.features.map(feature => ({
+                address: feature.place_name,
+                lat: feature.center[1], // Note: flipped from Mapbox format
+                lng: feature.center[0], // Note: flipped from Mapbox format
+                bbox: feature.bbox
+            }));
+            
+            callback(null, results);
+        } else {
+            callback('No results found', null);
+        }
+    } catch (error) {
+        console.error('Geocoding error:', error);
+        callback('Geocoding service error', null);
+    }
+};
+
+/**
+ * Reverse geocode coordinates to an address
+ */
+FreshFuturesGeocoder.prototype.reverseGeocode = async function(lat, lng, callback) {
+    try {
+        const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${this.mapboxToken}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.features && data.features.length > 0) {
+            const address = data.features[0].place_name;
+            callback(null, address);
+        } else {
+            callback('Address not found', null);
+        }
+    } catch (error) {
+        console.error('Reverse geocoding error:', error);
+        callback('Reverse geocoding service error', null);
+    }
+};
+
+
+// Export the classes to the global window object for use in other files
 window.FreshFuturesMap = FreshFuturesMap;
+window.FreshFuturesGeocoder = FreshFuturesGeocoder;
+

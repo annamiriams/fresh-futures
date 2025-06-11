@@ -1,14 +1,19 @@
 from django import forms
 from .models import Garden, GoalOption, PlantOption, SupportOption, User
 
+
 class GardenForm(forms.ModelForm):
+    # Added these hidden fields for map coordinates
+    latitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    longitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
+                                 
     goals = forms.ModelMultipleChoiceField(
         # queryset => collection of db rows
-        # Each option from this queryset will become a checkbox option (from GoalOption.objects.all()) 
+        # Each option from this queryset will become a checkbox option (from GoalOption.objects.all())
         queryset=GoalOption.objects.all().order_by('name'),
-            # Could change how these options are ordered but for now they're alphabetical.
+        # Could change how these options are ordered but for now they're alphabetical.
         widget=forms.CheckboxSelectMultiple,
-            # Changes the default usage of dropdown options to multi-select boxes. 
+        # Changes the default usage of dropdown options to multi-select boxes.
         required=False
     )
     plants_to_grow = forms.ModelMultipleChoiceField(
@@ -27,12 +32,14 @@ class GardenForm(forms.ModelForm):
         fields = [
             'name',
             'address',
-            'goals', 
-            'other_goal', 
-            'plants_to_grow', 
-            'support_needed', 
+            'latitude',
+            'longitude',
+            'goals',
+            'other_goal',
+            'plants_to_grow',
+            'support_needed',
             'timeline',
-        ] 
+        ]
         widgets = {
             'timeline': forms.RadioSelect(attrs={'class': 'timeline-radio'}),
         }
