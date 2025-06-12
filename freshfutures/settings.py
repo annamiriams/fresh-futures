@@ -15,6 +15,9 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 
+# operating system environment
+os.environ['GDAL_LIBRARY_PATH'] = '/usr/lib/libgdal.so'
+
 # load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
