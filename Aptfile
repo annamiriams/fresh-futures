@@ -2,3 +2,5 @@ gdal-bin
 libgdal-dev
 python3-gdal
 libblas3
+libgeos-dev
+libproj-dev
