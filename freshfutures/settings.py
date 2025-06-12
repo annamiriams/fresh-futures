@@ -147,6 +147,10 @@ else:
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': 'fresh_futures_db',
+            # 'USER': 'annam',
+            # 'PASSWORD': '',
+            # 'HOST': 'localhost',
+            # 'PORT': '5432',
             # Add USER, PASSWORD, HOST, PORT if needed
         }
     }
