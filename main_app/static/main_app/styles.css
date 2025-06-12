@@ -1,16 +1,28 @@
 /* Global Styles */
 body {
-    font-family: "Inter", sans-serif;
+    font-family: "Fredoka", sans-serif;
     font-weight: 400;
     font-style: normal;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #F6F6F6;
+}
+
+/* Background image */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
 }
 
 /* Font Families */
-.instrument-serif {
-    font-family: "Instrument Serif", serif;
+.fredoka-serif {
+    font-family: "Fredoka", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -29,6 +41,7 @@ body {
 
 .logo-container {
     padding: 2rem;
+    background-color: #F6F6F6;
 }
 
 .logo-container a {
@@ -92,9 +105,11 @@ body {
 /* Buttons */
 .btn {
     /* padding: 1rem; */
+    background-color: #F6F6F6;
     border: 1px solid #d1d5db;
     border-radius: 9999px;
     cursor: pointer;
+    font-family: "Inter", sans-serif;
     font-size: 2rem;
     font-weight: 500;
     transition: 0.4s ease;
@@ -110,8 +125,8 @@ body {
 
 .btn-primary,
 .btn-secondary {
-    background-color: #000;
-    color: #fff;
+    background-color: #A9CCBA;
+    color: #333333;
 }
 
 .btn-primary:hover,
@@ -122,7 +137,7 @@ body {
 }
 
 .btn-secondary {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 /* Alerts */
@@ -190,17 +205,22 @@ body {
     display: block;
 }
 
+.form-input input::placeholder {
+    color: #ADAEBC;
+}
+
 .form-input input,
 .form-input textarea {
     width: 90%;
     max-height: 8rem;
     padding: 1rem;
     border-radius: 1rem;
-    border: 1px solid #000;
+    border: 1px solid #D1D5DB;
     font-size: 2rem;
     margin-top: 1rem;
     /* Adding so resizing cannot occur horizontally and message up the styling of the rest of the page. */
     resize: vertical;
+    background-color: #F3F4F6;
 }
 
 .form-input input[type="checkbox"] {
@@ -222,7 +242,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    text-align: left;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -234,6 +254,10 @@ body {
 .survey {
     align-items: left;
     text-align: left;
+}
+
+.survey p {
+    font-family: "Inter", sans-serif;
 }
 
 textarea {
@@ -266,11 +290,11 @@ textarea {
 }
 
 .radio-button {
-    border: 1px solid #d1d5db;
+    background-color: #F6F6F6;
+    border: 1px solid #D1D5DB;
     padding: 15px 25px;
     border-radius: 9999px;
     cursor: pointer;
-    background-color: white;
     color: black;
     transition: all 0.2s ease-in-out;
     display: inline-block;
@@ -285,21 +309,14 @@ textarea {
 
 /* Styling for selected button. */
 .radio-option input[type="radio"]:checked+.radio-button {
-    background-color: black;
+    background-color: #A9CCBA;
+    border: 1px solid #E5E7EB;
     color: white;
 }
 
 .accordion-container {
     padding: 6px 10px 6px 10px;
     gap: 10px;
-}
-
-.accordion-container h1 {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    font-size: 34px;
-    line-height: 30px;
-    text-align: center;
 }
 
 .accordion {
@@ -318,7 +335,7 @@ textarea {
     text-align: left;
     font-family: "Inter", sans-serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 2.2em;
     line-height: 20px;
     cursor: pointer;
     font-weight: bold;
@@ -335,15 +352,19 @@ textarea {
     padding: 0 16px;
     gap: 24px;
     font-family: "Inter", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 2em;
+    line-height: 1.6em;
 }
 
 .accordion.open .accordion-content {
     max-height: 1000px;
     opacity: 1;
     padding: 16px;
+}
+
+.accordion-content p, 
+li {
+    color: #143022 !important;
 }
 
 .acc-button-container {
@@ -354,6 +375,10 @@ textarea {
     gap: 5px;
 }
 
+.step-8-items {
+    list-style-type: none;
+}
+
 /* Profile */
 
 .gardener-container {
@@ -362,7 +387,7 @@ textarea {
     justify-content: center;
     text-align: center;
     max-width: 90%;
-    margin: 0 auto;   
+    margin: 0 auto;
     margin-bottom: 1em;
 }
 
@@ -385,50 +410,49 @@ textarea {
     list-style-type: none;
 }
 
+.garden-item p {
+    font-family: "Inter", sans-serif;
+}
+
+.task-container {
+    max-width: 90%;
+    margin: 1em 0;
+}
+
 .tasks-container ul {
     padding: 0;
 }
 
-.task-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 90%;
-}
-
 /* Customize the label (the container) */
 .task-item {
-    display: block;
-    position: relative;
-    padding-left: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin: 1em;
+    gap: 1em;
     cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    font-family: "Inter", sans-serif;
     font-size: 1.8em;
+    color: black;
 }
 
 .task-item p {
     margin: 0;
     font-size: .6em;
+    color: black;
 }
 
 /* Hide the browser's default checkbox */
 .task-item input {
     position: absolute;
     opacity: 0;
-    cursor: pointer;
     height: 0;
     width: 0;
 }
 
 /* Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     height: 30px;
     width: 30px;
     background-color: white;
@@ -456,8 +480,24 @@ textarea {
     height: 14px;
     border: solid black;
     border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
 
+/* Links */
+.link:link {
+    color: #F6F6F6;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.link:visited {
+    color: #F6F6F6;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.link:active {
+    color: #A9CCBA;
+    background-color: transparent;
+    text-decoration: underline;
+}
