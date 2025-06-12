@@ -10,6 +10,14 @@ from django.urls import reverse_lazy
 def home(request):
     return render(request, 'main_app/home.html')
 
+def profile(request):
+    user = request.user
+    gardens = Garden.objects.filter(created_by=user)
+    return render(request, 'main_app/profile.html', {
+        'user': user,
+        'gardens': gardens,
+    })
+
 def test_maps(request):
     """
     Test view to verify both map types are working

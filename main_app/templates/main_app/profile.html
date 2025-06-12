@@ -1,0 +1,102 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class='container'>
+
+    <div class='gardener-container'>
+        <h1 class="instrument-serif header-text">Welcome, {{ user.first_name }}!</h1>
+    </div>
+
+    <div class='garden-container'>
+        {% if gardens %}
+        <ul>
+            {% for garden in gardens %}
+            <li class='garden-item'>
+                {% comment %} <img src="{% static 'main_app/images/garden-icon.png' %}" alt="A simple line drawing of a plant, in black." class='plant-icon'> {% endcomment %}
+                <p class='text-md'>{{ garden.name }}</p>
+                <p>Founded Today, Jun 14th</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <p>Map here</p>
+    </div>
+
+    <div class='tasks-container'>
+        <h2 class='text-lg instrument-serif'>This Week's Tasks</h2>
+
+
+        <ul class='task-list'>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Create mission statement for garden
+                    <p>Determine what your goals are</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Create mission statement for garden
+                    <p>Determine what your goals are</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Visit garden location(s)
+                    <p>Take photos, make note of sun exposure</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Document garden dimensions
+                    <p>This will be helpful with mapping the garden</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Talk with the city
+                    <p>For help with finding public land, permits, etc.</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Contact land owner and obtain
+                    <p>Obtain permissions to start a garden</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Determine what crops will grow best
+                    <p>Consult with BeetBot for ideas</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class='task-container'>
+                <label class='task-item'>
+                    Brainstorm ways to gather support
+                    <p>How will you access water, seeds, volunteers?</p>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

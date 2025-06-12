@@ -46,6 +46,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 MAPBOX_ACCESS_TOKEN = os.getenv('MAPBOX_ACCESS_TOKEN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+# Updated from this because I was getting errors in deployment re debug being undefined when in heroku
 # if not 'ON_HEROKU' in os.environ:
 #     DEBUG = True
     
