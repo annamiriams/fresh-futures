@@ -118,8 +118,14 @@
     border-left: 4px solid #4CAF50;
 }
 
-.map-instructions strong {
+.map-instructions strong,
+.map-instructions p {
+    font-family: "Inter", sans-serif;
     color: #1a4a1e;
+}
+
+.map-instructions p {
+    font-size: .6em;
 }
 
 .location-status {
@@ -501,8 +507,8 @@
    =================================================================== */
 
 .garden-location-description {
-    font-size: 1rem;
-    color: #666;
+    font-size: .6rem;
+    /* color: #666; */
     margin-bottom: 1rem;
     line-height: 1rem;
 }

@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="instrument-serif header-text">Create Your Account</h1>
+    <h1 class="fredoka-serif header-text">Create Your Account</h1>
     <form method="POST" class="form">
         {% csrf_token %}
 
@@ -21,36 +21,36 @@
         {% endif %}
         <div class="form-input">
             <label>First Name</label>
-            <input type="text" name="first_name" required />
+            <input type="text" name="first_name" placeholder="Enter your first name" required />
         </div>
         <div class="form-input">
             <label>Last Name</label>
-            <input type="text" name="last_name" required />
+            <input type="text" name="last_name" placeholder="Enter your last name" required />
         </div>
         <div class="form-input">
             <label>Username</label>
-            <input type="text" name="username" required />
+            <input type="text" name="username" placeholder="Choose a username" required />
             {% if form.username.errors %}
             <span class="text-danger"> {{ form.username.errors }} </span>
             {% endif %}
         </div>
         <div class="form-input">
             <label>Email Address</label>
-            <input type="email" name="email" required />
+            <input type="email" name="email" placeholder="you@email.com" required />
             {% if form.email.errors %}
             <span class="text-danger"> {{ form.email.errors }} </span>
             {% endif %}
         </div>
         <div class="form-input">
             <label>Password</label>
-            <input type="password" name="password1" required />
+            <input type="password" name="password1" placeholder="Create a password" required />
             {% if form.password1.errors %}
             <span class="text-danger"> {{ form.password1.errors }} </span>
             {% endif %}
         </div>
         <div class="form-input">
             <label>Confirm Password</label>
-            <input type="password" name="password2" required />
+            <input type="password" name="password2" placeholder="Confirm your password" required />
             {% if form.password2.errors %}
             <span class="text-danger"> {{ form.password2.errors }} </span>
             {% endif %}
@@ -71,13 +71,16 @@
 
         <!-- Location Section -->
         <div class='survey-question'>
-            <p class='text-lg'>Your Location (Optional)</p>
-            <p style="font-size: 1.25rem; color: #666; margin-bottom: 1rem; line-height: 1.75rem;">
+            {% comment %} <p class='text-lg'>Your Location (optional)</p> {% endcomment %}
+            {% comment %} <p style="font-size: 1.25rem; color: #E5E7EB; margin-bottom: 1rem; line-height: 1.75rem;">
                 This helps us show you gardens near you and connect you with local gardeners.
-            </p>
+            </p> {% endcomment %}
 
             <div class="form-input">
                 <label>Address, City, or Zip Code</label>
+                <label style="font-size: 1.25rem">
+                    This helps us show you gardens near you and connect you with local gardeners.
+                </label>
                 <input type="text" name="address" id="address-input" placeholder="Enter your location..."
                     autocomplete="off">
                 {% if form.address.errors %}
@@ -113,10 +116,10 @@
 
         <div class="form-input flex items-start gap-4">
             <input type="checkbox" name="terms" required />
-            <label> I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>. </label>
+            <label> I agree to the <a href="" class='link'>Terms of Service</a> and <a href="" class='link'>Privacy Policy</a>. </label>
         </div>
         <button class="btn btn-primary" type="submit">Continue</button>
-        <p class="mt-2">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        <p class="mt-2">Already have an account? <a href="{% url 'login' %}" class='link'>Login</a></p>
     </form>
 </div>
 
