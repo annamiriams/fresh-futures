@@ -7,4 +7,5 @@ urlpatterns = [
     # path('user/', views.UserUpdate.as_view(), name='user-update'),
     path('start/', views.start, name='start'),
     path('start/survey/', views.GardenCreate.as_view(), name='garden-create'),
+    path('profile/', views.profile, name='profile'),
 ]

@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<div>
+    <h1>Welcome, {{ user.first_name }}!</h1>
+</div>
+
+<div>
+    {% if gardens %}
+    <ul>
+        {% for garden in gardens %}
+        <li>
+            {{ garden.name }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+<div>
+    <p>Map here</p>    
+</div>
+
+<div>
+    <h2>This Week's Tasks</h2>
+    
+    
+    <ul class='task-list'>
+        <div class="task-item">
+            <label class="container">
+                Create mission statement for garden
+                <p>Determine what your goals are</p>
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+
+        <div class="task-item">
+            <input type="checkbox" checked="checked" class='checkmark'>
+            <label>
+                Create mission statement for garden
+                <p>Determine what your goals are</p>
+            </label>
+        </div>
+
+        <li class='task-item'>
+            Create mission statement for garden
+            <p>Determine what your goals are</p>
+        </li>
+        <li class='task-item'>
+            Visit garden location(s)
+            <p>Take photos, make note of sun exposure</p>
+        </li>
+        <li class='task-item'>
+            Document garden dimensions
+            <p>This will be helpful with mapping the garden</p>
+        </li>
+        <li class='task-item'>
+            Talk with the city
+            <p>For help with finding public land, permits, etc.</p>
+        </li>
+        <li class='task-item'>
+            Contact land owner and obtain
+            <p>Obtain permissions to start a garden</p>
+        </li>
+        <li class='task-item'>
+            Determine what crops will grow best
+            <p>Consult with BeetBot for ideas</p>
+        </li>
+        <li class='task-item'>
+            Brainstorm ways to gather support
+            <p>How will you access water, seeds, volunteers?</p>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
