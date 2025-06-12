@@ -56,6 +56,7 @@ else:
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS=['https://*.herokuapp.com']
 
 # Application definition
 
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 ]
 
@@ -188,6 +190,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'main_app' / 'static',  # Tell Django to look in main_app/static
