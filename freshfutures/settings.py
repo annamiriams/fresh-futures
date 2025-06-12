@@ -16,7 +16,7 @@ import os
 import dj_database_url
 
 # operating system environment
-os.environ['GDAL_LIBRARY_PATH'] = '/usr/lib/libgdal.so'
+# os.environ['GDAL_LIBRARY_PATH'] = '/usr/lib/libgdal.so'
 
 # load_dotenv()
 
