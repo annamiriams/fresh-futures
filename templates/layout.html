@@ -28,10 +28,33 @@
   <link rel="stylesheet" href="{% static 'main_app/css/map-styles.css' %}" />
 </head>
 
+<div id="beetbot-message" class="beetbot-message hidden">
+    Beetbot feature coming soon!
+</div>
+
+<a id="beetbot-button" href="#">
+    <img src="{% static 'main_app/images/beetbot.png' %}" alt="Beetbot Icon" />
+</a>
+
 <body>
   <img src="{% static 'main_app/images/FF-background.png' %}" alt="" class="background-image">
 
-  {% include 'header.html' %} {% block content %}{% endblock %} {% include 'footer.html' %}
+  
+  {% include 'header.html' %} {% block content %}{% endblock %} 
+
+  {% comment %} <a id="beetbot" href="">
+    <img src="{% static 'main_app/images/beetbot.png' %}" alt="Beetbot icon." />
+  </a> {% endcomment %}
+
+  {% include 'footer.html' %}
 </body>
 
 </html>
+
+<script>
+    document.getElementById("beetbot-button").addEventListener("click", function(e) {
+        e.preventDefault();
+        const message = document.getElementById("beetbot-message");
+        message.classList.toggle("show");
+    });
+</script>

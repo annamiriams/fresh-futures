@@ -150,6 +150,11 @@
     color: #856404;
 }
 
+.location-text {
+    font-size: 0.8em;
+    color: #ADAEBC;
+}
+
 .selected-location {
     background: #f0f8f0;
     padding: 10px;
@@ -188,11 +193,11 @@
     border-radius: 9999px;
     cursor: pointer;
     font-family: "Inter", sans-serif;
-    font-size: 1rem;
+    font-size: 1.8em;
     font-weight: 500;
     transition: 0.4s ease;
-    background-color: #000;
-    color: #fff;
+    background-color: #A9CCBA;
+    color: black;
     text-decoration: none;
     margin: 0.5rem 0;
     width: auto;
@@ -221,7 +226,7 @@
     border-radius: 9999px;
     cursor: pointer;
     font-family: "Inter", sans-serif;
-    font-size: 1rem;
+    font-size: 1.8em;
     transition: 0.3s ease;
 }
 

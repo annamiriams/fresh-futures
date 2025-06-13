@@ -207,6 +207,7 @@ body {
 
 .form-input input::placeholder {
     color: #ADAEBC;
+    font-size: 0.8em;
 }
 
 .form-input input,
@@ -229,6 +230,11 @@ body {
     width: auto;
     height: auto;
     margin-right: 1rem;
+}
+
+/* Change size of checkboxes on survey. More styling will probably require hiding default values and overriding them with new designs. */
+input[type="checkbox"] {
+    transform: scale(2);
 }
 
 .form p {
@@ -256,8 +262,10 @@ body {
     text-align: left;
 }
 
-.survey p {
+.survey p,
+.survey label {
     font-family: "Inter", sans-serif;
+    font-size: 1.8em;
 }
 
 textarea {
@@ -299,6 +307,7 @@ textarea {
     transition: all 0.2s ease-in-out;
     display: inline-block;
     text-align: center;
+    font-size: 1.8em;
     min-width: 180px;
 }
 
@@ -324,11 +333,11 @@ textarea {
     border-radius: 10px;
     padding: 10px 10px;
     margin-bottom: 1.5rem;
-    background-color: #fff;
+    background-color: #f6f6f6;
 }
 
 .accordion-button button {
-    background-color: #fff;
+    background-color: #f6f6f6;
     width: 100%;
     padding: 15px;
     border: none;
@@ -364,7 +373,7 @@ textarea {
 
 .accordion-content p, 
 li {
-    color: #143022 !important;
+    color: #143022 !important; 
 }
 
 .acc-button-container {
@@ -500,4 +509,54 @@ li {
     color: #A9CCBA;
     background-color: transparent;
     text-decoration: underline;
+}
+
+/* Beetbot */
+
+#beetbot-button {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    z-index: 1000;
+}
+
+#beetbot-button img {
+    width: 15em;
+    height: 18em;
+    cursor: pointer;
+}
+
+.beetbot-message {
+    position: fixed;
+    bottom: 10em;
+    right: 1em;
+    background-color: #F6F6F6;
+    color: #143022;
+    border: 1px solid #143022;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 250px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    font-size: 2em;
+    text-align: center;
+    display: none;
+}
+
+.beetbot-message.show {
+    display: block;
+    animation: fadeInUp 0.4s ease;
+}
+
+/* Transition the message on the y-axis from 0 to 100%, and from 0 to 1 opacity */
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
 }

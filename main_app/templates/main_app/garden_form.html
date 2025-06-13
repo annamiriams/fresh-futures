@@ -17,13 +17,12 @@
 
     <div class='survey'>
 
-        <div>
-            <p class='text-lg'>Help us get to know more about you and your goals.</p>
-        </div>
-
         <form action="" method="post" class="form-container" id="garden-form">
             {% csrf_token %}
 
+            <div>
+                <p>Help us get to know more about you and your goals.</p>
+            </div>
             {% comment %} Adding validation error check {% endcomment %}
             {% if form.errors %}
             <div>
