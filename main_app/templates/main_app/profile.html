@@ -8,27 +8,132 @@
         <h1 class="fredoka-serif header-text">Welcome, {{ user.first_name }}!</h1>
     </div>
 
-    <div class='garden-container'>
-        {% if gardens %}
-        <ul>
-            {% for garden in gardens %}
-            <li class='garden-item'>
-                {% comment %} <img src="{% static 'main_app/images/garden-icon.png' %}" alt="A simple line drawing of a plant, in black." class='plant-icon'> {% endcomment %}
-                <p class='text-md'>{{ garden.name }}</p>
-                <p>Founded Today, Jun 14th</p>
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
+    <!-- Garden Card Section -->
+    {% if gardens %}
+    {% for garden in gardens %}
+    <div class="garden-card">
+        <!-- Garden Header -->
+        <div class="garden-header">
+            <div class="garden-icon">🌱</div>
+            <div class="garden-info">
+                <h3 class="garden-name">{{ garden.name }}</h3>
+                <p class="garden-date">Founded {{ garden.created_at|date:"M jS, Y" }}</p>
+            </div>
+        </div>
 
-    <div>
-        <p>Map here</p>
+        <!-- Garden Stats -->
+        <div class="garden-stats">
+            <div class="stat-item">
+                <div class="stat-number">{{ garden.plants_to_grow.count|default:"0" }}</div>
+                <div class="stat-label">Plants Growing</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Volunteers</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Donations</div>
+            </div>
+        </div>
     </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- PROFILE MAP SECTION -->
+    <div class="profile-map-section">
+        <h2 class="text-lg fredoka-serif">Your Gardens Map</h2>
+        
+        <!-- Include map CSS and scripts -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+              integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+              crossorigin=""/>
+        <link rel="stylesheet" href="{% static 'main_app/css/map-styles.css' %}">
+
+        <div class="map-container">
+            <!-- Map element -->
+            <div id="gardener-profile-map" class="map-profile" style="height: 400px; width: 100%; border-radius: 8px; margin-bottom: 15px;"></div>
+            
+            <!-- Gardens summary -->
+            <div class="gardens-summary">
+                <span id="gardens-count">
+                    {% if gardens|length > 0 %}
+                        {{ gardens|length }} garden{{ gardens|length|pluralize }} 
+                        {% if user.latitude and user.longitude %}
+                            and your location
+                        {% endif %}
+                    {% elif user.latitude and user.longitude %}
+                        Showing your location
+                    {% else %}
+                        No location data available - set your location in account settings
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+        <!-- Load JavaScript after the map container is ready -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                crossorigin=""></script>
+        <script src="{% static 'main_app/js/map-components.js' %}"></script>
+        <script src="{% static 'main_app/js/garden-map.js' %}"></script>
+
+        <script>
+            // Set Mapbox token
+            window.MAPBOX_TOKEN = '{{ mapbox_token }}';
+            
+            // Initialize profile map when page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                // User's gardens with location data
+                const userGardens = [
+                    {% for garden in gardens %}
+                    {% if garden.latitude and garden.longitude %}
+                    {
+                        id: {{ garden.id }},
+                        name: "{{ garden.name|escapejs }}",
+                        description: "{{ garden.description|truncatewords:20|escapejs }}",
+                        address: "{{ garden.address|escapejs }}",
+                        latitude: {{ garden.latitude }},
+                        longitude: {{ garden.longitude }},
+                        created_by_name: "{{ garden.created_by.get_full_name|default:garden.created_by.username|escapejs }}",
+                        timeline: "{{ garden.timeline|escapejs }}"
+                    }{% if not forloop.last %},{% endif %}
+                    {% endif %}
+                    {% endfor %}
+                ];
+                console.log("Gardens data:", userGardens); 
+                // User's location if available
+                const userLocation = {% if user.latitude and user.longitude %}{
+                    lat: {{ user.latitude }},
+                    lng: {{ user.longitude }}
+                }{% else %}null{% endif %};
+                
+                // Initialize map
+                const profileMap = new GardenMap('gardener-profile-map');
+                
+                if (userGardens.length > 0) {
+                    // Show user's gardens + their location
+                    profileMap.initDiscoverMode(userGardens, userLocation);
+                    console.log('Profile map: showing', userGardens.length, 'gardens');
+                } else if (userLocation) {
+                    // No gardens but show user location
+                    profileMap.initDiscoverMode([], userLocation);
+                    console.log('Profile map: showing user location only');
+                } else {
+                    // No gardens, no location - show default map
+                    profileMap.initDiscoverMode([], null);
+                    document.getElementById('gardener-profile-map').style.opacity = '0.7';
+                    console.log('Profile map: no location data available');
+                }
+            });
+        </script>
+    </div>
+    <!-- END PROFILE MAP SECTION -->
 
     <div class='tasks-container'>
         <h2 class='text-lg fredoka-serif'>This Week's Tasks</h2>
-
 
         <ul class='task-list'>
             <div class='task-container'>

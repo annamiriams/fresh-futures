@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from .forms import GardenForm
 # from .forms import UserForm
 from django.urls import reverse_lazy
+from django.conf import settings
 
 # Create your views here.
 def home(request):
@@ -16,6 +17,7 @@ def profile(request):
     return render(request, 'main_app/profile.html', {
         'user': user,
         'gardens': gardens,
+        'mapbox_token': settings.MAPBOX_ACCESS_TOKEN,  # Pass the token to the template
     })
 
 def test_maps(request):
