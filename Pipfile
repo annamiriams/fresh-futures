@@ -10,7 +10,6 @@ python-dotenv = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
-gdal = "*"
 
 [dev-packages]
 
