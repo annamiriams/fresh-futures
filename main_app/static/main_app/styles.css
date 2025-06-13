@@ -22,7 +22,7 @@ body {
 
 /* Font Families */
 .fredoka-serif {
-    font-family: "Fredoka", sans-serif;
+    font-family: "Instrument Serif", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -162,9 +162,11 @@ body {
 }
 
 .header-text {
+    font-family: "Instrument Serif", serif;
     font-size: 4.5rem;
     line-height: 1.25;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 /* Hero Section */
@@ -390,27 +392,13 @@ li {
 
 /* Profile */
 
-.gardener-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    max-width: 90%;
-    margin: 0 auto;
-    margin-bottom: 1em;
-}
-
-.garden-container,
-.task-container {
+.garden-container {
     background-color: #F6F6F6;
     border: 1px solid black;
     border-radius: 10px;
     margin: 1em;
-}
-
-.garden-container {
     display: flex;
-    margin: 0 auto;
+    margin: 1em auto;
     align-items: center;
     max-width: 40%;
 }
@@ -424,8 +412,10 @@ li {
 }
 
 .task-container {
-    max-width: 90%;
-    margin: 1em 0;
+    background-color: #F6F6F6;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1em 0;  
 }
 
 .tasks-container ul {
@@ -509,6 +499,111 @@ li {
     color: #A9CCBA;
     background-color: transparent;
     text-decoration: underline;
+}
+
+/* Garden Card Styles */
+.garden-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.garden-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.garden-icon {
+    width: 48px;
+    height: 48px;
+    background: #f3f4f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.garden-info {
+    flex: 1;
+}
+
+.garden-name {
+    font-family: "Inter", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0 0 4px 0;
+    color: #1f2937;
+}
+
+.garden-date {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+}
+
+.garden-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    text-align: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 400;
+    color: #1f2937;
+    margin-bottom: 4px;
+    font-family: "Inter", sans-serif;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #6b7280;
+    font-family: "Inter", sans-serif;
+}
+
+/* Profile Map Section */
+.profile-map-section {
+    margin: 2rem 0;
+}
+
+.profile-map-section h2 {
+    margin-bottom: 1rem;
+}
+
+.map-container {
+    width: 100%;
+}
+
+.map-profile {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.gardens-summary {
+    padding: 1rem;
+    background: #ffffff; 
+    color: #333333;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    font-weight: 500;
 }
 
 /* Beetbot */

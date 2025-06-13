@@ -61,6 +61,7 @@ class Garden(models.Model):
     # Basic garden information
     name = models.CharField(max_length=200)
     description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)  
     
     # Location fields
     address = models.CharField(max_length=500, blank=True)
