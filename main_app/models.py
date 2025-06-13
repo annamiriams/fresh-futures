@@ -7,6 +7,9 @@ class User(AbstractUser):
     # Django's built-in fields are inherited:
     # username, email, password, first_name, last_name, etc.
     
+    # Adding so we can integrate the user survey into the register survey.
+    has_completed_onboarding = models.BooleanField(default=False)
+    
     EXPERIENCE_LEVEL = [
         ('beginner', 'Beginner'),
         ('intermediate', 'Intermediate'),
@@ -16,9 +19,9 @@ class User(AbstractUser):
     
     # location fields:
     address = models.CharField(max_length=500, blank=True)
-    latitude = models.FloatField(null=True, blank=True, editable=False)  # Hidden from users
-    longitude = models.FloatField(null=True, blank=True, editable=False)  # Hidden from users
-    location = gis_models.PointField(null=True, blank=True, editable=False)  # Hidden from users
+    latitude = models.FloatField(null=True, blank=True)  # Hidden from users
+    longitude = models.FloatField(null=True, blank=True)  # Hidden from users
+    location = gis_models.PointField(null=True, blank=True)  # Hidden from users
     
     # custom save method to create geospatial data
     def save(self, *args, **kwargs):
@@ -58,12 +61,13 @@ class Garden(models.Model):
     # Basic garden information
     name = models.CharField(max_length=200)
     description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)  
     
     # Location fields
     address = models.CharField(max_length=500, blank=True)
-    latitude = models.FloatField(null=True, blank=True, editable=False)  # Hidden from users
-    longitude = models.FloatField(null=True, blank=True, editable=False)  # Hidden from users
-    location = gis_models.PointField(null=True, blank=True, editable=False)  # Hidden from users
+    latitude = models.FloatField(null=True, blank=True)  # Hidden from users
+    longitude = models.FloatField(null=True, blank=True)  # Hidden from users
+    location = gis_models.PointField(null=True, blank=True)  # Hidden from users
     
     # Relationships 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)

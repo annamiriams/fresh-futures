@@ -2,12 +2,23 @@ from django.shortcuts import render
 # from django.http import HttpResponse
 from .models import Garden, User
 from django.views.generic.edit import CreateView, UpdateView
-from .forms import GardenForm, UserForm
+from .forms import GardenForm
+# from .forms import UserForm
 from django.urls import reverse_lazy
+from django.conf import settings
 
 # Create your views here.
 def home(request):
     return render(request, 'main_app/home.html')
+
+def profile(request):
+    user = request.user
+    gardens = Garden.objects.filter(created_by=user)
+    return render(request, 'main_app/profile.html', {
+        'user': user,
+        'gardens': gardens,
+        'mapbox_token': settings.MAPBOX_ACCESS_TOKEN,  # Pass the token to the template
+    })
 
 def test_maps(request):
     """
@@ -118,15 +129,15 @@ def test_maps(request):
 def start(request):
     return render(request, 'main_app/start.html')
 
-class UserUpdate(UpdateView):
-    model = User
-    form_class = UserForm
-    # reverse_lazy doesn't generate a URL immediately (ie 'lazily'). Used in particular in CBV success_urls
-    success_url = reverse_lazy('start')
+# class UserUpdate(UpdateView):
+#     model = User
+#     form_class = UserForm
+#     # reverse_lazy doesn't generate a URL immediately (ie 'lazily'). Used in particular in CBV success_urls
+#     success_url = reverse_lazy('start')
     
-    # Update only the logged-in user.
-    def get_object(self):
-        return self.request.user
+#     # Update only the logged-in user.
+#     def get_object(self):
+#         return self.request.user
 
 class GardenCreate(CreateView):
     model = Garden

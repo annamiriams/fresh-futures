@@ -1,11 +1,19 @@
 {% extends 'layout.html' %}
 {% load static %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'main_app/styles.css' %}" />
+<!-- Leaflet CSS for interactive map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<!-- Custom map styles -->
+<link rel="stylesheet" href="{% static 'main_app/css/map-styles.css' %}">
 {% endblock %}
+
 {% block content %}
+
 <div class='container survey-container'>
-    <h1 class="hero-secion instrument-serif header-text">Where ya at?</h1>
+    <h1 class="fredoka-serif header-text">Let's see where you are in the process!</h1>
 
     <div class='survey'>
 
@@ -13,7 +21,7 @@
             <p class='text-lg'>Help us get to know more about you and your goals.</p>
         </div>
 
-        <form action="" method="post" class="form-container">
+        <form action="" method="post" class="form-container" id="garden-form">
             {% csrf_token %}
 
             {% comment %} Adding validation error check {% endcomment %}
@@ -27,11 +35,78 @@
                 <p>What do you want your garden to be named?</p>
                 {{ form.name }}
             </div>
-            {% comment %} Add some kind of error logic based on mapping abilities... {% endcomment %}
-            <div class='survey-question form-input'>
-                <p>Garden address (if applicable):</p>
-                {{ form.address }}
+
+            {% comment %} location section with interactive map {% endcomment %}
+            <div class='survey-question'>
+                <p>Where will your garden be located?</p>
+                <p class="garden-location-description">
+                    Search for an address or click on the map to set your garden's location.
+                </p>
+
+                <!-- Address input (keep existing form field but add ID) -->
+                <div class="form-input">
+                    {{ form.address }}
+                    {% if form.address.errors %}
+                    <span class="text-danger">{{ form.address.errors }}</span>
+                    {% endif %}
+                </div>
+
+                <!-- Hidden coordinate fields for form submission -->
+                <input type="hidden" name="latitude" id="garden-latitude" value="{{ form.latitude.value|default:'' }}">
+                <input type="hidden" name="longitude" id="garden-longitude"
+                    value="{{ form.longitude.value|default:'' }}">
+
+                <!-- Interactive map -->
+                <div class="map-instructions">
+                    <strong>How to set location:</strong><br>
+                    <p>
+                        • Type an address in the search box above<br>
+                    </p>
+                    <p>
+                        • Click "Use My Current Location" to center on you<br>
+                    </p>
+                    <p> 
+                        • Click anywhere on the map to place your garden<br>
+                    </p>
+                    <p>
+                        • Drag the marker to fine-tune the location
+                    </p>
+                </div>
+
+                <div id="garden-location-map" class="garden-location-map" style="
+                height: 350px !important; 
+                width: 100%; 
+                border-radius: 1rem; 
+                border: 2px solid #ddd;
+                margin: 1rem 0;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+                "></div>
+
+                <!-- Location controls -->
+                <div class="location-controls">
+                    <button type="button" id="use-current-location" class="location-btn">
+                        Use My Current Location
+                    </button>
+
+                    <button type="button" id="clear-location" class="location-btn-clear">
+                        Clear Location
+                    </button>
+                </div>
+
+                <!-- Location status display -->
+                <div id="location-status" class="location-status">
+                    <span class="location-text">
+                        {% if form.latitude.value and form.longitude.value %}
+                        Location set
+                        {% else %}
+                        Click on the map or search for an address to set your garden location
+                        {% endif %}
+                    </span>
+                </div>
             </div>
+
             <div class='survey-question'>
                 <p>What are your main goals for this garden? (Select all that apply.)</p>
                 {{ form.goals }}
@@ -66,7 +141,7 @@
     </div>
 
 
-    <div class="instrument-serif text-lg">
+    <div class="fredoka-serif text-lg">
         <p>Thanks for planting the first seed!</p>
     </div>
 
@@ -75,4 +150,202 @@
     </form>
 </div>
 
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<!-- Your existing map components -->
+<script src="{% static 'main_app/js/map-components.js' %}"></script>
+<script src="{% static 'main_app/js/garden-map.js' %}"></script>
+
+<!-- Initialize garden map -->
+<script>
+    window.MAPBOX_TOKEN = '{{ mapbox_token }}';
+
+    // Fix Leaflet icons
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+
+    // Wait until the DOM is fully loaded before querying elements or initializing the map
+    document.addEventListener('DOMContentLoaded', function () {
+        const addressInput = document.querySelector('input[name="address"]');
+        const latInput = document.getElementById('garden-latitude');
+        const lngInput = document.getElementById('garden-longitude');
+        const useLocationBtn = document.getElementById('use-current-location');
+        const clearLocationBtn = document.getElementById('clear-location');
+        const locationStatus = document.querySelector('#location-status .location-text');
+
+        // Set ID on address input for easier targeting
+        addressInput.id = 'garden-address-input';
+
+        // Initialize garden map using existing GardenMap class
+        // 'garden-location-map' is the ID of the container div
+        const gardenMap = new GardenMap('garden-location-map', {
+            center: [39.8283, -98.5795], // Center of US
+            zoom: 4
+        });
+        // tell Leaflet to recalc size & re-center once the map has fully initialized
+        gardenMap.map.whenReady(() => {
+        gardenMap.map.invalidateSize();
+        gardenMap.map.setView(
+          [39.8283, -98.5795],
+          gardenMap.map.getZoom()
+    );
+  });
+
+        setTimeout(() => {
+            if (gardenMap && gardenMap.map) {
+                gardenMap.map.invalidateSize();
+            }
+        }, 200);
+
+        // keep track of the marker currently on the map
+        let currentMarker = null;
+
+        // Load existing location if editing
+        const existingLat = latInput.value;
+        const existingLng = lngInput.value;
+        if (existingLat && existingLng) {
+            showLocationOnMap(parseFloat(existingLat), parseFloat(existingLng), addressInput.value);
+        }
+
+        // Handle map clicks
+        gardenMap.onMapClick((lat, lng) => {
+            // Reverse-geocode the clicked coordinates to get a human-readable address
+            gardenMap.reverseGeocode(lat, lng, (error, address) => {
+                // Fallback to lat/lng string if no address is returned
+                const displayAddress = address || `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                addressInput.value = displayAddress;
+                showLocationOnMap(lat, lng, displayAddress);
+            });
+        });
+
+        // Address search with US prioritization
+        // Debounced search-as-you-type for address lookup
+        let searchTimeout;
+        addressInput.addEventListener('input', function () {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim();
+
+            // If the query is too short, clear coordinates and prompt user
+            if (query.length < 3) {
+                latInput.value = '';
+                lngInput.value = '';
+                updateLocationStatus('Enter an address to set garden location');
+                return;
+            }
+
+            // Wait 1 second after typing stops before sending a geocode request
+            searchTimeout = setTimeout(() => {
+                gardenMap.geocodeAddress(query, (error, results) => {
+                    if (!error && results && results.length > 0) {
+                        // Prioritize US results but fall back to first result
+                        const bestResult = results.find(r => r.address.includes('United States')) || results[0];
+                        showLocationOnMap(bestResult.lat, bestResult.lng, bestResult.address);
+                        // Update the input with the formatted address from Mapbox
+                        this.value = bestResult.address;
+                    }
+                });
+            }, 1000);
+        });
+
+        // Use current location
+        useLocationBtn.addEventListener('click', function () {
+            const originalText = this.textContent;
+            this.textContent = 'Getting location...';
+            this.disabled = true;
+
+            // Invoke browser geolocation via our GardenMap helper
+            gardenMap.getUserLocation((error, location) => {
+                if (error) {
+                    alert('Could not get your location: ' + error);
+                    this.textContent = originalText;
+                    this.disabled = false;
+                    return;
+                }
+                // Reverse-geocode the coordinates we just fetched
+                gardenMap.reverseGeocode(location.lat, location.lng, (error, address) => {
+                    const displayAddress = address || 'Current Location';
+                    addressInput.value = displayAddress;
+                    showLocationOnMap(location.lat, location.lng, displayAddress);
+
+                    // Restore the button state
+                    this.textContent = originalText;
+                    this.disabled = false;
+                });
+            });
+        });
+
+        // Clear location
+        clearLocationBtn.addEventListener('click', function () {
+            // Reset inputs and remove marker from the map
+            addressInput.value = '';
+            latInput.value = '';
+            lngInput.value = '';
+
+            if (currentMarker) {
+                gardenMap.map.removeLayer(currentMarker);
+                currentMarker = null;
+            }
+            // Re-center map to default view
+            gardenMap.centerOn(39.8283, -98.5795, 4);
+            updateLocationStatus('Click on the map or search for an address to set your garden location');
+        });
+
+        // Show location on map
+        function showLocationOnMap(lat, lng, address) {
+            // Zoom in to the selected spot
+            gardenMap.centerOn(lat, lng, 15);
+            // Remove old marker, if any
+            if (currentMarker) {
+                gardenMap.map.removeLayer(currentMarker);
+            }
+
+            // Add a draggable marker so users can fine-tune their location
+            currentMarker = gardenMap.addMarker(lat, lng, {
+                popupText: address || 'Garden Location',
+                draggable: true,
+                onDrag: (newLat, newLng) => {
+                    // Update inputs as the marker moves
+                    latInput.value = newLat;
+                    lngInput.value = newLng;
+
+                    // Optionally update the address by reverse-geocoding the new coords
+                    gardenMap.reverseGeocode(newLat, newLng, (error, newAddress) => {
+                        if (!error && newAddress) {
+                            addressInput.value = newAddress;
+                            updateLocationStatus(`Location set: ${newAddress}`);
+                        }
+                    });
+                }
+            });
+            // Sync hidden inputs with the chosen coordinates
+            latInput.value = lat;
+            lngInput.value = lng;
+            updateLocationStatus(`Location set: ${address || 'Custom location'}`);
+        }
+
+        // Update status display
+        function updateLocationStatus(message) {
+            if (locationStatus) {
+                locationStatus.textContent = message;
+            }
+        }
+
+        // Form validation
+        // Warn users if they submit without setting a location
+        document.getElementById('garden-form').addEventListener('submit', function (e) {
+            if (!latInput.value || !lngInput.value) {
+                const proceed = confirm('Your garden has no location set. It will not appear on maps or be discoverable by other gardeners. Continue anyway?');
+                if (!proceed) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
