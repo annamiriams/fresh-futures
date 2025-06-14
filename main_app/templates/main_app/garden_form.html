@@ -13,7 +13,7 @@
 {% block content %}
 
 <div class='container survey-container'>
-    <h1 class="fredoka-serif header-text">Let's see where you are in the process!</h1>
+    <h1 class="poppins header-text">Let's see where you are in the process!</h1>
 
     <div class='survey'>
 
@@ -95,15 +95,15 @@
                 </div>
 
                 <!-- Location status display -->
+                {% if form.latitude.value and form.longitude.value %}
                 <div id="location-status" class="location-status">
                     <span class="location-text">
-                        {% if form.latitude.value and form.longitude.value %}
                         Location set
-                        {% else %}
-                        Click on the map or search for an address to set your garden location
-                        {% endif %}
+                        {% comment %} {% else %}
+                        Click on the map or search for an address to set your garden location {% endcomment %}
                     </span>
                 </div>
+                {% endif %}
             </div>
 
             <div class='survey-question'>
@@ -122,9 +122,9 @@
                 <p>What kind of support do you need to get started? (Select all that apply.)</p>
                 {{ form.support_needed }}
             </div>
+            <p style='font-size: 2.25rem'>How soon are you hoping to get started?</p>
             <div class='radio-container'>
                 {% comment %} I can't figure out why this p font size isn't matching all the others... {% endcomment %}
-                <p style='font-size: 2.25rem'>How soon are you hoping to get started?</p>
                 <div class="radio-group">
                     {% for radio in form.timeline %}
                     <div class="radio-option">
@@ -140,12 +140,14 @@
     </div>
 
 
-    <div class="fredoka-serif text-lg">
+    <div class="poppins text-lg">
         <p>Thanks for planting the first seed!</p>
     </div>
 
-    <button type="submit" class="btn btn-secondary">Submit</button>
-
+    <div class='acc-button-container'>
+        <button type="submit" class="btn btn-secondary">Submit</button>
+    </div>
+    
     </form>
 </div>
 

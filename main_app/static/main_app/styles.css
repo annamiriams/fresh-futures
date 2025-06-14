@@ -1,4 +1,9 @@
 /* Global Styles */
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
 body {
     font-family: "poppins", sans-serif;
     font-weight: 400;
@@ -15,13 +20,14 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: -1;
+    background-size: cover;
 }
 
 /* Font Families */
-.fredoka-serif {
+.poppins {
     font-family: "poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -40,8 +46,8 @@ body {
 }
 
 .logo-container {
-    /* padding: 2rem; */
-    padding: 0 1.8rem;
+    padding: 0 1.2rem;
+    width: 100%;
     background-color: #F6F6F6;
 }
 
@@ -176,7 +182,7 @@ body {
     font-size: 4.5rem;
     line-height: 1.25;
     margin-bottom: 1rem;
-    text-align: center;
+    text-align: left;
 }
 
 /* Hero Section */
@@ -238,7 +244,7 @@ body {
 
 .form-input input,
 .form-input textarea {
-    width: 90%;
+    width: 96%;
     max-height: 8rem;
     padding: 1rem;
     border-radius: 1rem;
@@ -251,7 +257,7 @@ body {
 }
 
 .form-input input[type="checkbox"] {
-    transform: scale(3);
+    transform: scale(2);
     transform-origin: center;
     width: auto;
     height: auto;
@@ -260,7 +266,8 @@ body {
 
 /* Change size of checkboxes on survey. More styling will probably require hiding default values and overriding them with new designs. */
 input[type="checkbox"] {
-    transform: scale(2);
+    transform: scale(4);
+    margin: 1em;
 }
 
 .form p {
@@ -270,14 +277,14 @@ input[type="checkbox"] {
 }
 
 /* Survey */
-.survey-container {
+/* .survey-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: left;
     max-width: 800px;
     margin: 0 auto;
-}
+} */
 
 .survey-question {
     padding: 10px;
@@ -307,9 +314,9 @@ textarea {
 /* Custom radio buttons (for user experience and garden experience) */
 .radio-container {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .radio-group {
@@ -350,7 +357,7 @@ textarea {
 }
 
 .accordion-container {
-    padding: 6px 10px 6px 10px;
+    /* padding: 6px 10px 6px 10px; */
     gap: 10px;
 }
 
@@ -358,7 +365,7 @@ textarea {
     border: 1px solid #000;
     border-radius: 10px;
     padding: 10px 10px;
-    margin: 2em;
+    margin: 2em 0;
     /* margin-bottom: 1.5rem; */
     background-color: #f6f6f6;
 }
