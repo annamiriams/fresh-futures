@@ -6,6 +6,7 @@ from .forms import GardenForm
 # from .forms import UserForm
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.shortcuts import redirect
 
 # Create your views here.
 def home(request):
@@ -22,9 +23,21 @@ def profile(request):
 
 def test_maps(request):
     """
-    Test view to verify both map types are working
-    Simulates both gardener profile and discover gardens scenarios
+    Development testing view for map functionality
+    
+    PURPOSE:
+    - Test both discovery and profile map modes
+    - Verify map components work with real or mock data
+    - Provide isolated environment for map debugging
+    - Demo functionality 
+    
+    ACCESS: Only available in DEBUG mode for development
+    URL: /test-maps/
     """
+    # Only allow access in development mode
+    if not settings.DEBUG:
+        return redirect('home')
+    
     from django.contrib.auth import get_user_model
     from .models import Garden
     
