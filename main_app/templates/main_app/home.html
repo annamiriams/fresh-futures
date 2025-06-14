@@ -17,18 +17,13 @@
 
   <!-- Content section with action buttons and images -->
   <div class="content-section mt-2">
-    <p class="bold">Let's grow something good - together.</p>
+    <p class="bold">Let's grow something good—together.</p>
     <div class="grid-row mt-2">
       <div class="left-col">
         <img src="{% static 'main_app/images/Start-A-Garden-img.png' %}" alt="Two hands holding a plant" />
       </div>
       <div class="right-col">
-        <p class="">Ready to get your hands dirty? Let's grow food, connection, and something that lasts.</p>
-        {% comment %}
-        <a href="{% url 'user-update' %}">
-          <button class="btn btn-primary">Start a Garden</button>
-        </a>
-        {% endcomment %}
+        <p class="home-blurb">Ready to get your hands dirty? Let's grow food, connection, and something that lasts.</p>
         <a href="{% url 'start' %}" class="btn btn-primary">Start a Garden</a>
       </div>
     </div>
@@ -37,8 +32,8 @@
         <img src="{% static 'main_app/images/Join-A-Garden-img.png' %}" alt="Watering a plant" />
       </div>
       <div class="right-col">
-        <p>Help things bloom—lend a hand, grow with us, and be part of something meaningful.</p>
-        <button class="btn btn-primary">Join a Garden</button>
+        <p class="home-blurb">Help things bloom—lend a hand, grow with us, and be part of something meaningful.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Join a Garden</a>
       </div>
     </div>
     <div class="grid-row mt-2">
@@ -46,8 +41,8 @@
         <img src="{% static 'main_app/images/Donate-img.png' %}" alt="A bag of carrot seeds" />
       </div>
       <div class="right-col">
-        <p>Give a little, grow a lot. Your gift plants seeds of change where it’s needed most.</p>
-        <button class="btn btn-primary flex">Donate Now</button>
+        <p class="home-blurb">Give a little, grow a lot. Your gift plants seeds of change where it’s needed most.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Donate Now</a>
       </div>
     </div>
     <div class="grid-row mt-2">
@@ -55,8 +50,9 @@
         <img src="{% static 'main_app/images/Beetbot-img.png' %}" alt="An image of a beet" />
       </div>
       <div class="right-col">
-        <p>From first seed to full garden—find tips, tools, FAQs, and BeetBot here.</p>
-        <button class="btn btn-primary">Learn with Beet Bot</button>
+        <p class="home-blurb">From first seed to full garden—find tips, tools, FAQs, and BeetBot here.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Learn with BeetBot</a>
+
       </div>
     </div>
   </div>

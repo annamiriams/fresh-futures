@@ -16,7 +16,8 @@ def registerView(request):
             user = form.save(commit=False)
             user.has_completed_onboarding = False
             user.save()
-            return redirect('login')
+            login(request, user)
+            return redirect('home')
         else:
             print("Form is not valid")
             messages.error(request, form.errors)
