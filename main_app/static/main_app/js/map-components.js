@@ -1,6 +1,19 @@
 /**
  * Fresh Futures Map Components
  * Core mapping functionality using Leaflet + Mapbox
+ *
+* FEATURES:
+ * • Interactive Leaflet maps with Mapbox tiles
+ * • Marker management (add, remove, drag events, popups)
+ * • Geocoding: Address ↔ Coordinates (Mapbox API)
+ * • Map navigation: center, zoom, fit bounds
+ * • Click/drag event handling with callbacks
+ * • CSP-compliant geocoder alternative
+ * • Django template integration via window.MAPBOX_TOKEN
+ * 
+ * USAGE:
+ * const map = new FreshFuturesMap('container-id')
+ * class GardenMap extends FreshFuturesMap
  */
 
 //  * NOTE FOR DEVELOPERS: 
