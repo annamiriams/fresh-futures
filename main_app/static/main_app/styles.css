@@ -33,6 +33,12 @@ body {
     font-style: normal;
 }
 
+.instrument-serif {
+    font-family: "Instrument Serif", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* Font Sizes */
 .text-lg {
     font-size: 2rem;
