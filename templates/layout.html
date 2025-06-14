@@ -5,14 +5,13 @@
 
 <head>
   <title>Fresh Futures</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    {% comment %} New fonts {% endcomment %}
+  {% comment %} Inter (Google) {% endcomment %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  {% comment %} Poppins (Adobe) {% endcomment %}
+  <link rel="stylesheet" href="https://use.typekit.net/pou6tkk.css">
 
   <link rel="stylesheet" href="{% static 'main_app/styles.css' %}" />
   <link rel="stylesheet" href="{% static 'main_app/nav.css' %}" />
@@ -26,10 +25,27 @@
   <link rel="stylesheet" href="{% static 'main_app/css/map-styles.css' %}" />
 </head>
 
+<div id="beetbot-message" class="beetbot-message hidden">
+    Beetbot feature coming soon!
+</div>
+
+<a id="beetbot-button" href="#">
+    <img src="{% static 'main_app/images/beetbot.png' %}" alt="Beetbot Icon" />
+</a>
+
 <body>
   <img src="{% static 'main_app/images/FF-background.png' %}" alt="" class="background-image">
 
+  
   {% include 'header.html' %} {% block content %}{% endblock %} {% include 'footer.html' %}
 </body>
 
 </html>
+
+<script>
+    document.getElementById("beetbot-button").addEventListener("click", function(e) {
+        e.preventDefault();
+        const message = document.getElementById("beetbot-message");
+        message.classList.toggle("show");
+    });
+</script>

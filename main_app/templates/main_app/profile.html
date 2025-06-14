@@ -5,7 +5,7 @@
 <div class='container'>
 
     <div class='gardener-container'>
-        <h1 class="fredoka-serif header-text">Welcome, {{ user.first_name }}!</h1>
+        <h1 class="poppins header-text">Welcome, {{ user.first_name }}!</h1>
     </div>
 
     <!-- Garden Card Section -->
@@ -40,6 +40,10 @@
         </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div class="garden-card">
+        <div class="">No gardens</div>
+    </div>
     {% endif %}
 
     <!-- PROFILE MAP SECTION -->
@@ -51,7 +55,7 @@
 <!-- END PROFILE MAP SECTION -->
 
     <div class='tasks-container'>
-        <h2 class='text-lg fredoka-serif'>This Week's Tasks</h2>
+        <h2 class='text-lg poppins'>This Week's Tasks</h2>
 
         <ul class='task-list'>
             <div class='task-container'>

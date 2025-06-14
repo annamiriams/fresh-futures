@@ -4,6 +4,7 @@
   z-index: 1;
   -webkit-user-select: none;
   user-select: none;
+  padding-right: 3em;
 }
 
 #menuToggle a {
@@ -71,6 +72,7 @@
 
 /* The menu itself */
 #menu {
+  width: calc(100vw - 100px); 
   max-width: 400px;
   width: 100vw;
   max-height: 100vh;
