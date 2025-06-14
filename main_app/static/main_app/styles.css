@@ -1,6 +1,6 @@
 /* Global Styles */
 body {
-    font-family: "Fredoka", sans-serif;
+    font-family: "poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
@@ -22,7 +22,7 @@ body {
 
 /* Font Families */
 .fredoka-serif {
-    font-family: "Instrument Serif", sans-serif;
+    font-family: "poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -40,12 +40,21 @@ body {
 }
 
 .logo-container {
-    padding: 2rem;
+    /* padding: 2rem; */
+    padding: 0 1.8rem;
     background-color: #F6F6F6;
 }
 
 .logo-container a {
     text-decoration: none;
+}
+
+.home-blurb {
+    line-height: 1em;
+}
+
+.home-blurb p {
+    font-size: 1.2em;
 }
 
 .logo {
@@ -60,7 +69,8 @@ body {
 
 .logo p {
     font-size: 2.5rem;
-    margin-left: 10px;
+    font-weight: 800;
+    margin-left: .8em;
     color: #000;
 }
 
@@ -71,7 +81,7 @@ body {
 
 /* Font Weights */
 .bold {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 /* Colors */
@@ -162,7 +172,7 @@ body {
 }
 
 .header-text {
-    font-family: "Instrument Serif", serif;
+    font-family: "poppins", sans-serif;
     font-size: 4.5rem;
     line-height: 1.25;
     margin-bottom: 1rem;
@@ -171,25 +181,39 @@ body {
 
 /* Hero Section */
 .hero-section p {
-    font-size: 1.25rem;
+    font-size: .8rem;
     line-height: 1.75rem;
     margin-bottom: 2rem;
 }
 
 /* Row Layout */
+.right-col {
+    padding: 2em;
+}
+
+.left-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .grid-row {
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
 
 .grid-row img {
-    width: 85%;
+    width: 100%;
     height: auto;
     margin: 0 auto;
 }
 
 .grid-row p {
-    font-size: 2.25rem;
+    font-size: .8em;
+}
+
+.content-section {
+    margin: 1em;
 }
 
 /* Form Styling */
@@ -334,14 +358,15 @@ textarea {
     border: 1px solid #000;
     border-radius: 10px;
     padding: 10px 10px;
-    margin-bottom: 1.5rem;
+    margin: 2em;
+    /* margin-bottom: 1.5rem; */
     background-color: #f6f6f6;
 }
 
 .accordion-button button {
     background-color: #f6f6f6;
     width: 100%;
-    padding: 15px;
+    padding: .8em;
     border: none;
     text-align: left;
     font-family: "Inter", sans-serif;
@@ -370,7 +395,7 @@ textarea {
 .accordion.open .accordion-content {
     max-height: 1000px;
     opacity: 1;
-    padding: 16px;
+    padding: 0 0.8em;
 }
 
 .accordion-content p, 
