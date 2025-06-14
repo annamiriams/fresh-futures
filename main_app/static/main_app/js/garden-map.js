@@ -1,6 +1,27 @@
 /**
  * Fresh Futures Garden Map Components
  * Specialized mapping functionality for garden discovery and profiles
+ *
+ * /**
+ * Fresh Futures Garden Map Components
+ * Specialized mapping functionality for garden discovery and profiles
+ * 
+ * FEATURES:
+ * • Garden discovery mode: Multiple gardens with search/filter
+ * • Gardener profile mode: Single garden focus view
+ * • Custom markers: Garden (🌱) and user location ("You")
+ * • Garden search: Filter by name, description, address, creator
+ * • Nearby gardens: Distance-based filtering with geolocation
+ * • Interactive popups: Garden details with view links
+ * • User location: Browser geolocation API integration
+ * • Distance calculations: Haversine formula for accuracy
+ * 
+ * USAGE:
+ * const map = new GardenMap('container-id')
+ * map.initDiscoverMode(gardens, userLocation)
+ * map.initProfileMode(garden)
+ * 
+ * EXTENDS: FreshFuturesMap (from map-components.js)
  */
 
 class GardenMap extends FreshFuturesMap {
